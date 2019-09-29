@@ -24,7 +24,7 @@ class LoginPresenterTest {
         presenter.lookupChanged("");
 
         assertFalse(model.getLoginButtonActive());
-        // TODO verify(view).disableLogin();
+        verify(view).disableLogin();
     }
 
     @Test
