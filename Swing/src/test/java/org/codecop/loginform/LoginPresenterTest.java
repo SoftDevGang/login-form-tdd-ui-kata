@@ -18,4 +18,16 @@ class LoginPresenterTest {
         assertFalse(model.getLoginButtonActive());
     }
 
+    @Test
+    void loginButtonGetsDisabledForEmptyPassword() {
+        LoginModel model = new LoginModel();
+        model.setLoginButtonActive(true);
+        
+        LoginPresenter presenter = new LoginPresenter(model);
+        
+        presenter.passwordChanged("");
+        
+        assertFalse(model.getLoginButtonActive());
+    }
+
 }
