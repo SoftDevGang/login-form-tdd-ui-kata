@@ -1,8 +1,6 @@
 package org.codecop.loginform;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,7 +13,9 @@ class LoginPresenterTest {
 
     LoginModel model = new LoginModel();
     LoginView view = mock(LoginView.class);
-    LoginPresenter presenter = new LoginPresenter(model, view);
+    AuthenticationService auth = mock(AuthenticationService.class);
+
+    LoginPresenter presenter = new LoginPresenter(model, view, auth);
 
     @Test
     void shouldPassLookupAndPasswordToModel() {
@@ -27,8 +27,6 @@ class LoginPresenterTest {
     }
 
     // --- login action
-
-    AuthenticationService auth = mock(AuthenticationService.class);
 
     @Test
     void shouldCloseViewOnSuccessLogin() {
@@ -44,10 +42,10 @@ class LoginPresenterTest {
 
     @Test
     void shouldDisplayErrorOnFailedLogin() {
-        model.setLookup("user");
-        model.setPassword("secret");
+        model.setLookup("user2");
+        model.setPassword("secret2");
 
-        when(auth.authenticate("user", "secret")).thenReturn(new AuthenticationResult(false, "Login failed."));
+        when(auth.authenticate("user2", "secret2")).thenReturn(new AuthenticationResult(false, "Login failed."));
 
         presenter.loginButtonClicked();
 
