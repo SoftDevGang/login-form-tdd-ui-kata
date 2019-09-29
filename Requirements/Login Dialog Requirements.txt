@@ -18,7 +18,7 @@ Styling
 
 * Background white.
 * Border around dialog: 1px dashed, colour #cccccc
-* Text: Georgia, Serif; colour #333333, 11 pt
+* Text: Georgia, Serif; colour #333333, 12 pt
 * Welcome Text: 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif; colour #cc6600 (orange), 15 pt
 * Errors are prefixed with little red error icon (X)
 * Warnings are prefixed with little red warning icon (!)
