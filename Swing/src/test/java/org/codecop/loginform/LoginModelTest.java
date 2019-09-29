@@ -20,8 +20,9 @@ class LoginModelTest {
     }
 
     @Test
-    void shouldControlLoginButton() {
+    void shouldContainLoginButtonActive() {
         assertFalse(model.getLoginButtonActive());
+
         model.setLoginButtonActive(true);
         assertTrue(model.getLoginButtonActive());
     }
