@@ -1,5 +1,7 @@
 package org.codecop.loginform;
 
+import java.util.function.BooleanSupplier;
+
 public class LoginModel {
 
     private String lookup;
@@ -19,6 +21,14 @@ public class LoginModel {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean getLoginButtonActive() {
+        return false;
+    }
+
+    public void setLoginButtonActive(boolean state) {
+
     }
 
 }
