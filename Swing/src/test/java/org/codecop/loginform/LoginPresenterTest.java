@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import org.codecop.auth.AuthenticationResult;
 import org.codecop.auth.AuthenticationService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class LoginPresenterTest {
 
@@ -78,6 +79,14 @@ class LoginPresenterTest {
         authenticationFinished.countDown();
         viewShowErrorCalled.await(1, TimeUnit.SECONDS);
         verify(view).showError("Login failed.");
+    }
+
+    // ---
+
+    @Test
+    void shouldRegisterItselfToView() {
+        // TODO capture listener, trigger each of them to test the wireing? 
+        verify(view).registerLoginListener(Mockito.any(LoginListener.class));
     }
 
 }
