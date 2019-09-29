@@ -3,7 +3,7 @@ Login Dialog Requirements
 
 Layout
 
-* Dialog title or page title is "Login to Clean Code Center"
+* Dialog title or page title or Border title is "Login to Clean Code Center"
 * Logo displayed on top of dialog, centered.
 * Message "Welcome to Clean Code Center!" displayed centered below logo.
 * Label "Phone, email or username" with input field next to it.
@@ -64,6 +64,7 @@ More Data
 * Checkbox "Remember Me" is enabled, backend is notified after successful login.
 * Captcha displayed on 10+ try to login unsuccessfully. Refresh Captcha on each try.
 
+---
 
 via Designing UX Login Form and Process https://uxplanet.org/designing-ux-login-form-and-process-8b17167ed5b9
 via How to Write Test Cases For a Login Page https://www.softwaretestinghelp.com/login-page-test-cases/
