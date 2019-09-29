@@ -24,4 +24,9 @@ public class SwingLoginPanel extends JPanel implements LoginView {
     public void showError(String message) {
     }
 
+    @Override
+    public void registerLoginButtonListener(LoginButtonListener listener) {
+        loginButton.addActionListener(ae -> listener.loginButtonClicked());
+    }
+
 }
