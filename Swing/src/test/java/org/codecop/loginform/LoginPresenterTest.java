@@ -107,4 +107,5 @@ class LoginPresenterTest {
 
 }
 
+// test case: shouldDisableLoginButtonOnNewDialog() {
 // test case: ? reset error message on success
