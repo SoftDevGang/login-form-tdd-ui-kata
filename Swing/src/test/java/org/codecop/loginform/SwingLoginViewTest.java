@@ -50,6 +50,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     public void testHasLookupFieldsWithStyle() throws ComponentSearchException {
         LoginListener listener = mock(LoginListener.class);
+        view.registerLoginListener(listener);
 
         showFrame((JPanel) view);
         JTextField lookupField = findLookupField();
@@ -68,6 +69,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     public void testHasPasswordFieldsWithStyle() throws ComponentSearchException {
         LoginListener listener = mock(LoginListener.class);
+        view.registerLoginListener(listener);
 
         showFrame((JPanel) view);
         JPasswordField passwordField = findPasswordField();
