@@ -6,8 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
+import org.codecop.swing.AllDocumentListener;
 
 public class SwingLoginPanel extends JPanel implements LoginView {
 
@@ -62,46 +62,16 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     @Override
     public void registerLoginListener(LoginListener listener) {
-        lookupField.getDocument().addDocumentListener(new DocumentListener() {
-
+        lookupField.getDocument().addDocumentListener(new AllDocumentListener() {
             @Override
-            public void removeUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            @Override
-            public void insertUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            @Override
-            public void changedUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            private void fire() {
+            protected void fire() {
                 listener.lookupChanged(lookupField.getText());
             }
         });
 
-        passwordField.getDocument().addDocumentListener(new DocumentListener() {
-
+        passwordField.getDocument().addDocumentListener(new AllDocumentListener() {
             @Override
-            public void removeUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            @Override
-            public void insertUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            @Override
-            public void changedUpdate(@SuppressWarnings("unused") DocumentEvent e) {
-                fire();
-            }
-
-            private void fire() {
+            protected void fire() {
                 listener.passwordChanged(new String(passwordField.getPassword()));
             }
         });
