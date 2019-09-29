@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import org.codecop.swing.AllDocumentListener;
 
@@ -23,6 +24,14 @@ public class SwingLoginPanel extends JPanel implements LoginView {
     private final JButton loginButton = new JButton("Log in");
 
     public SwingLoginPanel() {
+        setName("LoginPanel");
+        setBackground(Color.WHITE);
+        setForeground(new Color(0x333333));
+        Color titleColor = new Color(0xcccccc);
+        TitledBorder border = new TitledBorder(new LineBorder(titleColor, 2), "Login to Clean Code Center");
+        border.setTitleColor(titleColor);
+        setBorder(border);
+
         createLookupField();
         createPasswordField();
         createErrorField();

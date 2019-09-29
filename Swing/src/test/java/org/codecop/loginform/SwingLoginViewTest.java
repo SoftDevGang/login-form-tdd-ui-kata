@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import abbot.finder.ComponentSearchException;
 import abbot.finder.matchers.NameMatcher;
@@ -24,6 +25,26 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     public SwingLoginViewTest(String name) {
         super(name);
+    }
+
+    // --- panel
+
+    public void testHasNamedBorder() throws ComponentSearchException {
+        showFrame((JPanel) view);
+
+        JPanel loginPanel = findPanel();
+
+        TitledBorder namedBorder = (TitledBorder) loginPanel.getBorder();
+        assertNotNull(namedBorder);
+        assertEquals("Login to Clean Code Center", namedBorder.getTitle());
+
+        assertEquals(Color.WHITE, loginPanel.getBackground());
+        assertEquals(new Color(0x333333), loginPanel.getForeground());
+        assertEquals(12, loginPanel.getFont().getSize());
+    }
+
+    private JPanel findPanel() throws ComponentSearchException {
+        return (JPanel) getFinder().find(new NameMatcher("LoginPanel"));
     }
 
     // --- login button
