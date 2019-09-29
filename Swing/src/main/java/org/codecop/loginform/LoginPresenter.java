@@ -15,7 +15,11 @@ public class LoginPresenter {
 
         model.setLookup(newLookup);
 
-        if (model.getLookup() != null && !model.getLookup().isEmpty() && model.getPassword() != null && !model.getPassword().isEmpty()) {
+        enableButtonIfFieldsSet();
+    }
+
+    private void enableButtonIfFieldsSet() {
+        if (model.hasLookup() && model.hasPassword()) {
             model.setLoginButtonActive(true);
         }
     }
@@ -27,9 +31,7 @@ public class LoginPresenter {
 
         model.setPassword(newPassword);
 
-        if (model.getLookup() != null && !model.getLookup().isEmpty() && model.getPassword() != null && !model.getPassword().isEmpty()) {
-            model.setLoginButtonActive(true);
-        }
+        enableButtonIfFieldsSet();
     }
 
 }

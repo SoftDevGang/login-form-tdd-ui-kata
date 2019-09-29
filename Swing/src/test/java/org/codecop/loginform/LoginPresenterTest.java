@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 class LoginPresenterTest {
 
+    // --- enable/disable logic of Log in button
+    
     @Test
     void loginButtonGetsDisabledForEmptyLookup() {
         LoginModel model = new LoginModel();

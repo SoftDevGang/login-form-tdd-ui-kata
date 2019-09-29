@@ -14,12 +14,20 @@ public class LoginModel {
         return lookup;
     }
 
+    public boolean hasLookup() {
+        return getLookup() != null && !getLookup().isEmpty();
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean hasPassword() {
+        return getPassword() != null && !getPassword().isEmpty();
     }
 
     public boolean getLoginButtonActive() {
