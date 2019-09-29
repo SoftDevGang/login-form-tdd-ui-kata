@@ -7,4 +7,6 @@ public interface LoginView {
     void disableLogin();
 
     void close();
+
+    void showError(String message);
 }

@@ -1,6 +1,8 @@
 package org.codecop.loginform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,12 +17,11 @@ class LoginPresenterTest {
 
     LoginModel model = new LoginModel();
     LoginView view = mock(LoginView.class);
+    LoginPresenter presenter = new LoginPresenter(model, view);
 
     @Test
     void shouldDisableLoginButtonForEmptyLookup() {
         model.setLoginButtonActive(true);
-
-        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("");
 
@@ -32,8 +33,6 @@ class LoginPresenterTest {
     void shouldDisableLoginButtonForEmptyPassword() {
         model.setLoginButtonActive(true);
 
-        LoginPresenter presenter = new LoginPresenter(model, view);
-
         presenter.passwordChanged("");
 
         assertFalse(model.getLoginButtonActive());
@@ -42,8 +41,6 @@ class LoginPresenterTest {
 
     @Test
     void shouldPassLookupAndPasswordToModel() {
-        LoginPresenter presenter = new LoginPresenter(model, view);
-
         presenter.lookupChanged("user");
         presenter.passwordChanged("pass");
 
@@ -54,8 +51,6 @@ class LoginPresenterTest {
     @Test
     void shouldEnableLoginButtonloginForNonEmptyFields() {
         model.setLoginButtonActive(false);
-
-        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("Amanda");
         presenter.passwordChanged("secret123");
@@ -68,8 +63,6 @@ class LoginPresenterTest {
     void shouldNotEnableLoginButtonForLookupOnly() {
         model.setLoginButtonActive(false);
 
-        LoginPresenter presenter = new LoginPresenter(model, view);
-
         presenter.lookupChanged("Amanda");
 
         assertFalse(model.getLoginButtonActive());
@@ -78,8 +71,6 @@ class LoginPresenterTest {
     @Test
     void shouldNotEnableLoginButtonForPasswordOnly() {
         model.setLoginButtonActive(false);
-
-        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.passwordChanged("secret");
 
@@ -97,11 +88,22 @@ class LoginPresenterTest {
 
         when(auth.authenticate("user", "secret")).thenReturn(new AuthenticationResult(true, null));
 
-        LoginPresenter presenter = new LoginPresenter(model, view);
-
         presenter.loginButtonClicked();
 
         verify(view).close();
+    }
+
+    @Test
+    void shouldDisplayErrorOnFailedLogin() {
+        model.setLookup("user");
+        model.setPassword("secret");
+
+        when(auth.authenticate("user", "secret")).thenReturn(new AuthenticationResult(false, "Login failed."));
+
+        presenter.loginButtonClicked();
+
+        assertEquals("Login failed.", model.getErrorMessage());
+        verify(view).showError("Login failed.");
     }
 
 }

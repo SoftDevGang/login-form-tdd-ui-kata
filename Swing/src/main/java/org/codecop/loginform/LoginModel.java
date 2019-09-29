@@ -38,4 +38,8 @@ public class LoginModel {
         loginButtonActive = state;
     }
 
+    public String getErrorMessage() {
+        return null;
+    }
+
 }
