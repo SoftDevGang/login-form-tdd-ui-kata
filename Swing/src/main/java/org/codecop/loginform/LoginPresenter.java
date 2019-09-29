@@ -4,7 +4,7 @@ public class LoginPresenter {
 
     private final LoginModel model;
 
-    public LoginPresenter(LoginModel model) {
+    public LoginPresenter(LoginModel model, LoginView view) {
         this.model = model;
     }
 

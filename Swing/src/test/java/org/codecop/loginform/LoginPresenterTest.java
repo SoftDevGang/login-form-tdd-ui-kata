@@ -3,6 +3,8 @@ package org.codecop.loginform;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,35 +12,36 @@ class LoginPresenterTest {
 
     // --- enable/disable logic of Log in button
 
+    LoginModel model = new LoginModel();
+    LoginView view = mock(LoginView.class);
+
     @Test
-    void loginButtonGetsDisabledForEmptyLookup() {
-        LoginModel model = new LoginModel();
+    void shouldDisableLoginButtonForEmptyLookup() {
         model.setLoginButtonActive(true);
 
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("");
 
         assertFalse(model.getLoginButtonActive());
+        // TODO verify(view).disableLogin();
     }
 
     @Test
-    void loginButtonGetsEnabledForEmptyPassword() {
-        LoginModel model = new LoginModel();
+    void shouldDisableLoginButtonForEmptyPassword() {
         model.setLoginButtonActive(true);
 
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.passwordChanged("");
 
         assertFalse(model.getLoginButtonActive());
+        // TODO verify(view).disableLogin();
     }
 
     @Test
     void shouldPassLookupAndPasswordToModel() {
-        LoginModel model = new LoginModel();
-
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("user");
         presenter.passwordChanged("pass");
@@ -48,24 +51,23 @@ class LoginPresenterTest {
     }
 
     @Test
-    void loginButtonGetsEnabledForNonEmptyFields() {
-        LoginModel model = new LoginModel();
+    void shouldEnableLoginButtonloginForNonEmptyFields() {
         model.setLoginButtonActive(false);
 
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("Amanda");
         presenter.passwordChanged("secret123");
 
         assertTrue(model.getLoginButtonActive());
+        // TODO verify(view).enableLogin();
     }
 
     @Test
-    void loginButtonGetsNotEnabledForLookupOnly() {
-        LoginModel model = new LoginModel();
+    void shouldNotEnableLoginButtonForLookupOnly() {
         model.setLoginButtonActive(false);
 
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.lookupChanged("Amanda");
 
@@ -73,11 +75,10 @@ class LoginPresenterTest {
     }
 
     @Test
-    void loginButtonGetsNotEnabledForPasswordOnly() {
-        LoginModel model = new LoginModel();
+    void shouldNotEnableLoginButtonForPasswordOnly() {
         model.setLoginButtonActive(false);
 
-        LoginPresenter presenter = new LoginPresenter(model);
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
         presenter.passwordChanged("secret");
 
