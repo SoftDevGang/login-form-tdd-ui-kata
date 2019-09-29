@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class LoginPresenterTest {
@@ -46,9 +45,8 @@ class LoginPresenterTest {
         assertEquals("pass", model.getPassword());
     }
 
-    @Disabled
     @Test
-    void loginButtonGetsEnabledForNonEmptyLookup() {
+    void loginButtonGetsEnabledForNonEmptyFields() {
         LoginModel model = new LoginModel();
         model.setLoginButtonActive(false);
 
@@ -63,4 +61,3 @@ class LoginPresenterTest {
 }
 
 // not enabled when one is not empty, other stays empty
-// presenter passes changes to model
