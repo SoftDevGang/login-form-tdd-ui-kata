@@ -13,6 +13,8 @@ public class LoginPresenter {
             model.setLoginButtonActive(false);
         }
 
+        model.setLookup(newLookup);
+
         if (model.getLookup() != null && !model.getLookup().isEmpty() && model.getPassword() != null && !model.getPassword().isEmpty()) {
             model.setLoginButtonActive(true);
         }
@@ -22,6 +24,8 @@ public class LoginPresenter {
         if (newPassword.isEmpty()) {
             model.setLoginButtonActive(false);
         }
+
+        model.setPassword(newPassword);
 
         if (model.getLookup() != null && !model.getLookup().isEmpty() && model.getPassword() != null && !model.getPassword().isEmpty()) {
             model.setLoginButtonActive(true);
