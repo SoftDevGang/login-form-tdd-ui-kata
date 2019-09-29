@@ -5,4 +5,6 @@ public interface LoginView {
     void enableLogin();
 
     void disableLogin();
+
+    void close();
 }
