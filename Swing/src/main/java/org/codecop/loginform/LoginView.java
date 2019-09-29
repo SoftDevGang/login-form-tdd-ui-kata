@@ -10,5 +10,5 @@ public interface LoginView {
 
     void showError(String message);
 
-    void registerLoginButtonListener(LoginButtonListener listener);
+    void registerLoginListener(LoginListener listener);
 }
