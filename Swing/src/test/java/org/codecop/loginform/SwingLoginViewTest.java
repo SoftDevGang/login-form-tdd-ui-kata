@@ -91,7 +91,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     // --- error
 
-    public void testErrorDisplayWithStyle() throws ComponentSearchException {
+    public void testErrorDisplayWithStyle() throws ComponentSearchException, InterruptedException {
         showFrame((JPanel) view);
         JLabel errorField = findErrorField();
 
@@ -100,6 +100,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         assertNull(errorField.getIcon());
 
         view.showError("Alert!");
+        Thread.sleep(10);
 
         assertEquals("Alert!", errorField.getText());
         assertEquals(Color.RED, errorField.getForeground());

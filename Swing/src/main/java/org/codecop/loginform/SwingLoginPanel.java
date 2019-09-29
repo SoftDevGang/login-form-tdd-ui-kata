@@ -1,21 +1,31 @@
 package org.codecop.loginform;
 
+import java.awt.Color;
+import java.net.URL;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 
 import org.codecop.swing.AllDocumentListener;
 
 public class SwingLoginPanel extends JPanel implements LoginView {
 
-    JTextField lookupField = new JTextField(20);
-    JPasswordField passwordField = new JPasswordField(20);
-    JButton loginButton = new JButton("Log in");
+    private static final Color ERROR_COLOR = new Color(255, 0, 0);
+
+    private final JTextField lookupField = new JTextField(20);
+    private final JPasswordField passwordField = new JPasswordField(20);
+    private final JLabel errorField = new JLabel();
+    private final JButton loginButton = new JButton("Log in");
 
     public SwingLoginPanel() {
         createLookupField();
         createPasswordField();
+        createErrorField();
         createLoginButton();
     }
 
@@ -31,6 +41,12 @@ public class SwingLoginPanel extends JPanel implements LoginView {
         add(passwordField);
     }
 
+    private void createErrorField() {
+        errorField.setName("ErrorField");
+        errorField.setForeground(ERROR_COLOR);
+        add(errorField);
+    }
+
     private void createLoginButton() {
         loginButton.setName("LoginButton");
         add(loginButton);
@@ -42,6 +58,7 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     @Override
     public void showError(String message) {
+        SwingUtilities.invokeLater(() -> errorField.setText(message));
     }
 
     @Override
