@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class LoginPresenterTest {
 
     // --- enable/disable logic of Log in button
-    
+
     @Test
     void loginButtonGetsDisabledForEmptyLookup() {
         LoginModel model = new LoginModel();
@@ -60,6 +60,28 @@ class LoginPresenterTest {
         assertTrue(model.getLoginButtonActive());
     }
 
-}
+    @Test
+    void loginButtonGetsNotEnabledForLookupOnly() {
+        LoginModel model = new LoginModel();
+        model.setLoginButtonActive(false);
 
-// not enabled when one is not empty, other stays empty
+        LoginPresenter presenter = new LoginPresenter(model);
+
+        presenter.lookupChanged("Amanda");
+
+        assertFalse(model.getLoginButtonActive());
+    }
+
+    @Test
+    void loginButtonGetsNotEnabledForPasswordOnly() {
+        LoginModel model = new LoginModel();
+        model.setLoginButtonActive(false);
+
+        LoginPresenter presenter = new LoginPresenter(model);
+
+        presenter.passwordChanged("secret");
+
+        assertFalse(model.getLoginButtonActive());
+    }
+
+}
