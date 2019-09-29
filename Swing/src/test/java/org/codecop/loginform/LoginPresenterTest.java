@@ -36,7 +36,7 @@ class LoginPresenterTest {
         presenter.passwordChanged("");
 
         assertFalse(model.getLoginButtonActive());
-        // TODO verify(view).disableLogin();
+        verify(view).disableLogin();
     }
 
     @Test
@@ -60,7 +60,7 @@ class LoginPresenterTest {
         presenter.passwordChanged("secret123");
 
         assertTrue(model.getLoginButtonActive());
-        // TODO verify(view).enableLogin();
+        verify(view).enableLogin();
     }
 
     @Test
