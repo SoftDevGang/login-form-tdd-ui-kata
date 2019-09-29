@@ -9,7 +9,9 @@ public class LoginPresenter {
     }
 
     public void lookupChanged(String lookup) {
-
+        if (lookup.isEmpty()) {
+            model.setLoginButtonActive(false);
+        }
     }
 
 }
