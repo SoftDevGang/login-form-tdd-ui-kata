@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import org.codecop.auth.AuthenticationResult;
 import org.codecop.auth.AuthenticationService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class LoginPresenterTest {
 
@@ -103,6 +104,14 @@ class LoginPresenterTest {
         presenter.loginButtonClicked();
 
         verify(view).showError("Login failed.");
+    }
+
+    // ---
+
+    @Test
+    void shouldRegisterItselfToView() {
+        // TODO capture listener, trigger each of them to test the wireing? 
+        verify(view).registerLoginListener(Mockito.any(LoginListener.class));
     }
 
 }
