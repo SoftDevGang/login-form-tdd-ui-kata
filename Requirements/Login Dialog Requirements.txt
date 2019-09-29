@@ -26,7 +26,7 @@ Styling
 <a href="https://icon-library.net/icon/error-image-icon-21.html">Error Image Icon #95181</a>
 <a href="https://icon-library.net/icon/error-image-icon-11.html">Error Image Icon #95188</a>
 
-Logic with backend
+Logic with backend = "AuthenticationService".
 
 * Username and password given, button "Log in" clicked, backend reports success, dialog is closed.
 * Username and password given, button "Log in" clicked, backend reports no success, show message in error line.
@@ -61,7 +61,7 @@ Caps Lock Warning
 
 More Data
 
-* Checkbox "Remember Me", data is sent to backend.
+* Checkbox "Remember Me" is enabled, backend is notified after successful login.
 * Captcha displayed on 10+ try to login unsuccessfully. Refresh Captcha on each try.
 
 
