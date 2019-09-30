@@ -29,13 +29,13 @@ public class SwingLoginViewTest extends ComponentTestFixture {
     // --- login button
 
     public void testHasLoginButtonWithText() throws ComponentSearchException {
+        showFrame((JPanel) view);
         JButton loginButton = findLoginButton();
 
         assertEquals("Log in", loginButton.getText());
     }
 
     private JButton findLoginButton() throws ComponentSearchException {
-        showFrame((JPanel) view);
         return (JButton) getFinder().find(new NameMatcher("LoginButton"));
     }
 
@@ -43,6 +43,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         LoginListener listener = mock(LoginListener.class);
         view.registerLoginListener(listener);
 
+        showFrame((JPanel) view);
         JButton loginButton = findLoginButton();
         JButtonTester tester = new JButtonTester();
         tester.actionClick(loginButton);

@@ -13,8 +13,6 @@ import org.codecop.swing.AllDocumentListener;
 
 public class SwingLoginPanel extends JPanel implements LoginView {
 
-    private static final long serialVersionUID = -6162885532580634792L;
-
     private static final Color ERROR_COLOR = new Color(255, 0, 0);
 
     private final JTextField lookupField = new JTextField(20);
@@ -31,13 +29,11 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     private void createLookupField() {
         lookupField.setName("LookupField");
-
         add(lookupField);
     }
 
     private void createPasswordField() {
         passwordField.setName("PasswordField");
-
         add(passwordField);
     }
 
