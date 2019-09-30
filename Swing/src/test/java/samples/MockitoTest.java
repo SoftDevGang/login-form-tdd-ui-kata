@@ -1,8 +1,13 @@
 package samples;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.function.Consumer;
+
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 class MockitoTest {
 
@@ -14,6 +19,17 @@ class MockitoTest {
         runner.run();
         // assert
         verify(runner).run();
+    }
+
+    @Test
+    void shouldAssertWithArgumentCaptor() {
+        Consumer<String> consumer = mock(Consumer.class);
+
+        consumer.accept("John");
+
+        ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+        verify(consumer).accept(argument.capture());
+        assertEquals("John", argument.getValue());
     }
 
 }
