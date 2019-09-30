@@ -11,13 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 
 import abbot.finder.ComponentSearchException;
 import abbot.finder.matchers.NameMatcher;
 import abbot.tester.JButtonTester;
 import abbot.tester.JTextFieldTester;
-import junit.extensions.abbot.ComponentTestFixture;
+import junit.extensions.abbot.ComponentTestFixture; 
 
 public class SwingLoginViewTest extends ComponentTestFixture {
 
@@ -27,36 +26,12 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         super(name);
     }
 
-    // --- panel
-
-    public void testHasNamedBorder() throws ComponentSearchException {
-        showFrame((JPanel) view);
-
-        JPanel loginPanel = findPanel();
-
-        TitledBorder namedBorder = (TitledBorder) loginPanel.getBorder();
-        assertNotNull(namedBorder);
-        assertEquals("Login to Clean Code Center", namedBorder.getTitle());
-
-        assertEquals(Color.WHITE, loginPanel.getBackground());
-        assertEquals(new Color(0x333333), loginPanel.getForeground());
-        assertEquals(12, loginPanel.getFont().getSize());
-    }
-
-    private JPanel findPanel() throws ComponentSearchException {
-        return (JPanel) getFinder().find(new NameMatcher("LoginPanel"));
-    }
-
     // --- login button
 
-    public void testHasLoginButtonWithTextAndStyle() throws ComponentSearchException {
+    public void testHasLoginButtonWithText() throws ComponentSearchException {
         JButton loginButton = findLoginButton();
 
         assertEquals("Log in", loginButton.getText());
-        // colour dark blue
-        assertEquals(Color.BLUE, loginButton.getBackground());
-        assertEquals(Color.WHITE, loginButton.getForeground());
-        assertTrue(loginButton.isOpaque());
     }
 
     private JButton findLoginButton() throws ComponentSearchException {
@@ -77,7 +52,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     // --- input fields
 
-    public void testHasLookupFieldsWithStyle() throws ComponentSearchException {
+    public void testHasLookupFields() throws ComponentSearchException {
         LoginListener listener = mock(LoginListener.class);
         view.registerLoginListener(listener);
 
@@ -96,7 +71,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         return (JTextField) getFinder().find(new NameMatcher("LookupField"));
     }
 
-    public void testHasPasswordFieldsWithStyle() throws ComponentSearchException {
+    public void testHasPasswordFields() throws ComponentSearchException {
         LoginListener listener = mock(LoginListener.class);
         view.registerLoginListener(listener);
 
@@ -117,7 +92,7 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
     // --- error
 
-    public void testErrorDisplayWithStyle() throws ComponentSearchException {
+    public void testErrorDisplay() throws ComponentSearchException {
         showFrame((JPanel) view);
         JLabel errorField = findErrorField();
 
@@ -129,7 +104,6 @@ public class SwingLoginViewTest extends ComponentTestFixture {
 
         assertEquals("Alert!", errorField.getText());
         assertEquals(Color.RED, errorField.getForeground());
-        assertNotNull(errorField.getIcon());
         Border errorBorder = errorField.getBorder();
         assertNotNull(errorBorder);
     }

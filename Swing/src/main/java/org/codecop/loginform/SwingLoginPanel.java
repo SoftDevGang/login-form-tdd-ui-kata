@@ -1,16 +1,13 @@
 package org.codecop.loginform;
 
 import java.awt.Color;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import org.codecop.swing.AllDocumentListener;
 
@@ -26,14 +23,6 @@ public class SwingLoginPanel extends JPanel implements LoginView {
     private final JButton loginButton = new JButton("Log in");
 
     public SwingLoginPanel() {
-        setName("LoginPanel");
-        setBackground(Color.WHITE);
-        setForeground(new Color(0x333333));
-        Color titleColor = new Color(0xcccccc);
-        TitledBorder border = new TitledBorder(new LineBorder(titleColor, 2), "Login to Clean Code Center");
-        border.setTitleColor(titleColor);
-        setBorder(border);
-
         createLookupField();
         createPasswordField();
         createErrorField();
@@ -60,18 +49,11 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     private void createLoginButton() {
         loginButton.setName("LoginButton");
-        loginButton.setOpaque(true);
-        loginButton.setBackground(Color.BLUE);
-        loginButton.setForeground(Color.WHITE);
         add(loginButton);
     }
 
     @Override
     public void showError(String message) {
-        URL errorIcon = getClass().getClassLoader().getResource("icon-library.net_error-image-icon-21.png");
-        if (errorIcon != null) {
-            errorField.setIcon(new ImageIcon(errorIcon));
-        }
         errorField.setText(message);
         errorField.setBorder(new LineBorder(ERROR_COLOR));
     }
