@@ -16,6 +16,8 @@ import org.codecop.swing.AllDocumentListener;
 
 public class SwingLoginPanel extends JPanel implements LoginView {
 
+    private static final long serialVersionUID = -6162885532580634792L;
+
     private static final Color ERROR_COLOR = new Color(255, 0, 0);
 
     private final JTextField lookupField = new JTextField(20);
@@ -77,12 +79,15 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     @Override
     public void close() {
+        // 
     }
 
     @Override
     public void showError(String message) {
         URL errorIcon = getClass().getClassLoader().getResource("icon-library.net_error-image-icon-21.png");
-        errorField.setIcon(new ImageIcon(errorIcon));
+        if (errorIcon != null) {
+            errorField.setIcon(new ImageIcon(errorIcon));
+        }
         errorField.setText(message);
         errorField.setBorder(new LineBorder(ERROR_COLOR));
     }

@@ -23,6 +23,7 @@ class MockitoTest {
 
     @Test
     void shouldAssertWithArgumentCaptor() {
+        @SuppressWarnings("unchecked")
         Consumer<String> consumer = mock(Consumer.class);
 
         consumer.accept("John");
