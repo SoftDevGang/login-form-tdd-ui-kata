@@ -1,4 +1,4 @@
-# Login Dialog Requirements
+# Login Form Requirements
 
 ## Requirements for Bare Functionality
 
@@ -6,7 +6,7 @@
 
 Depending on the used technology, assume an Authentication service, facade or end point. It has a method to `authenticate` a user based on the user's phone, email or user name and her password. The call returns an `AuthenticationResult` which indicates success and an optional message. From now on the combination of a user's phone, email or user name is called the user's lookup.
 
-### Login Dialog
+### Login
 
 UI
 
@@ -35,13 +35,13 @@ TODO bare image
 ### More UI Elements
 
 * Dialog title or page title or border title is "Login to Clean Code Center"
-* The Code Cop logo is displayed on top of the dialog, centered.
-* The message "Welcome to Clean Code Center!" is displayed, centered below the logo.
+* The Code Cop logo is displayed on top of the window, centred. See [ApplicationLogo](./ApplicationLogo.gif).
+* The message "Welcome to Clean Code Center!" is displayed, centred below the logo.
 
 ### Styling
 
 * Background color is white.
-* Border around dialog is 1px dashed, with colour #cccccc.
+* Border around everything is 1px dashed, with colour #cccccc.
 * Welcome text is 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif, with colour #cc6600 (orange), size 15 pt.
 * All other text is Georgia, Serif, with colour #333333, size 12 pt.
 * Error messages are prefixed with little red error icon, form of an (X).
@@ -53,12 +53,12 @@ TODO bare image
 
 Focus and tab order
 
-* When the dialog opens, user name field is focused. The focus is shown by a yellow rectangle around the field.
+* When it opens, user name field is focused. The focus is shown by a yellow rectangle around the field.
 * Tab moves focus through fields: user name, password, ..., Log in button.
 
-### More UI Elements
+### Even More UI Elements
 
-* There is a link or button "Forgot Password" in left corner of dialog.
+* There is a link or button "Forgot Password" in bottom, left corner.
 * There is a check box "Remember Me". If it is enabled, the backend is notified after a successful login.
 
 ### More Interactions between UI and Presenter
@@ -83,7 +83,7 @@ Captcha
 
 * A Captcha is displayed on 10+ try to login unsuccessfully. Refresh Captcha on each try.
 
-TODO full image
+![sketch of the whole login](./SketchEverythingStyled.png)
 
 ## Resources
 
