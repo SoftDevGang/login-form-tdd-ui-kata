@@ -13,6 +13,23 @@ public class LoginPresenter {
         this.model = model;
         this.view = view;
         this.authenticationService = authenticationService;
+        view.registerLoginListener(new LoginListener() {
+
+            @Override
+            public void lookupChanged(String lookup) {
+                LoginPresenter.this.lookupChanged(lookup);
+            }
+
+            @Override
+            public void passwordChanged(String password) {
+                LoginPresenter.this.passwordChanged(password);
+            }
+
+            @Override
+            public void loginButtonClicked() {
+                LoginPresenter.this.loginButtonClicked();
+            }
+        });
     }
 
     public void lookupChanged(String newLookup) {
