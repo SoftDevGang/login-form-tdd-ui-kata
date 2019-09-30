@@ -18,12 +18,6 @@ public class MainToSeePanel {
             public AuthenticationResult authenticate(String phoneEmailUserName, String password) {
                 return new AuthenticationResult(false, "No access!");
             }
-
-            @SuppressWarnings("unused")
-            @Override
-            public void rememberMe(String phoneEmailUserName) {
-                //
-            }
         };
 
         new LoginPresenter(model, view, untrustingAuthenticationService);

@@ -1,8 +1,6 @@
 package org.codecop.loginform;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +17,4 @@ class LoginModelTest {
         assertEquals("secret123", model.getPassword());
     }
 
-    @Test
-    void shouldContainLoginButtonActive() {
-        assertFalse(model.getLoginButtonActive());
-
-        model.setLoginButtonActive(true);
-        assertTrue(model.getLoginButtonActive());
-    }
 }

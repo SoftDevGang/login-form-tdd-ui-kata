@@ -57,8 +57,6 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         assertEquals(Color.BLUE, loginButton.getBackground());
         assertEquals(Color.WHITE, loginButton.getForeground());
         assertTrue(loginButton.isOpaque());
-        // disabled at start
-        assertFalse(loginButton.isEnabled());
     }
 
     private JButton findLoginButton() throws ComponentSearchException {
@@ -66,22 +64,8 @@ public class SwingLoginViewTest extends ComponentTestFixture {
         return (JButton) getFinder().find(new NameMatcher("LoginButton"));
     }
 
-    public void testEnableDisableLoginButton() throws ComponentSearchException {
-        JButton loginButton = findLoginButton();
-
-        view.disableLogin();
-        assertFalse(loginButton.isEnabled());
-
-        view.enableLogin();
-        assertTrue(loginButton.isEnabled());
-
-        view.disableLogin();
-        assertFalse(loginButton.isEnabled());
-    }
-
     public void testSendButtonClickToPresenter() throws ComponentSearchException {
         LoginListener listener = mock(LoginListener.class);
-        view.enableLogin();
         view.registerLoginListener(listener);
 
         JButton loginButton = findLoginButton();

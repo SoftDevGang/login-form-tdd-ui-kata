@@ -63,23 +63,7 @@ public class SwingLoginPanel extends JPanel implements LoginView {
         loginButton.setOpaque(true);
         loginButton.setBackground(Color.BLUE);
         loginButton.setForeground(Color.WHITE);
-        loginButton.setEnabled(false);
         add(loginButton);
-    }
-
-    @Override
-    public void enableLogin() {
-        loginButton.setEnabled(true);
-    }
-
-    @Override
-    public void disableLogin() {
-        loginButton.setEnabled(false);
-    }
-
-    @Override
-    public void close() {
-        // 
     }
 
     @Override

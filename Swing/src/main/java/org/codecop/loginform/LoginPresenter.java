@@ -33,42 +33,16 @@ public class LoginPresenter {
     }
 
     public void lookupChanged(String newLookup) {
-        if (newLookup.isEmpty()) {
-            disableLoginButton();
-        }
-
         model.setLookup(newLookup);
-
-        enableLoginButtonIfFieldsSet();
-    }
-
-    private void disableLoginButton() {
-        model.setLoginButtonActive(false);
-        view.disableLogin();
-    }
-
-    private void enableLoginButtonIfFieldsSet() {
-        if (model.hasLookup() && model.hasPassword()) {
-            model.setLoginButtonActive(true);
-            view.enableLogin();
-        }
     }
 
     public void passwordChanged(String newPassword) {
-        if (newPassword.isEmpty()) {
-            disableLoginButton();
-        }
-
         model.setPassword(newPassword);
-
-        enableLoginButtonIfFieldsSet();
     }
 
     public void loginButtonClicked() {
         AuthenticationResult result = authenticationService.authenticate(model.getLookup(), model.getPassword());
-        if (result.success) {
-            view.close();
-        } else {
+        if (!result.success) {
             view.showError(result.message);
         }
     }
