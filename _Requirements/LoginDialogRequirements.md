@@ -23,7 +23,7 @@ Logic
 * User name and password given, button "Log in" clicked, backend reports success, dialog is closed.
 * User name and password given, button "Log in" clicked, backend reports no success, show message in error line.
 
-TODO bare image
+![sketch of the bare login](./SketchBare.png)
 
 ## Requirements for More/Optional Functionality
 
