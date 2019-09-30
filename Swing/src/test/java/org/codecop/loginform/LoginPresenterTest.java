@@ -2,6 +2,7 @@ package org.codecop.loginform;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -85,6 +86,8 @@ class LoginPresenterTest {
 
     @Test
     void shouldRegisterItselfToView() throws InterruptedException {
+        when(auth.authenticate(any(String.class), any(String.class))).thenReturn(new AuthenticationResult(true, null));
+
         // capture listener, trigger each of them to test the wiring 
         ArgumentCaptor<LoginListener> argument = ArgumentCaptor.forClass(LoginListener.class);
         verify(view).registerLoginListener(argument.capture());
