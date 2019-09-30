@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import org.codecop.auth.AuthenticationResult;
 import org.codecop.auth.AuthenticationService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
 
 class LoginPresenterTest {
 
@@ -110,8 +110,17 @@ class LoginPresenterTest {
 
     @Test
     void shouldRegisterItselfToView() {
-        // TODO capture listener, trigger each of them to test the wireing? 
-        verify(view).registerLoginListener(Mockito.any(LoginListener.class));
+        // capture listener, trigger each of them to test the wiring 
+        ArgumentCaptor<LoginListener> argument = ArgumentCaptor.forClass(LoginListener.class);
+        verify(view).registerLoginListener(argument.capture());
+        LoginListener listener = argument.getValue();
+
+        listener.lookupChanged("user");
+        assertEquals("user", model.getLookup());
+        listener.passwordChanged("pass");
+        assertEquals("pass", model.getPassword());
+        listener.loginButtonClicked();
+        verify(auth).authenticate("user", "pass");
     }
 
 }
