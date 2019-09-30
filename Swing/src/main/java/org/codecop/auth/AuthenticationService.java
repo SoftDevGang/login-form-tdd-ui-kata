@@ -4,5 +4,4 @@ public interface AuthenticationService {
 
     AuthenticationResult authenticate(String phoneEmailUserName, String password);
 
-    void rememberMe(String phoneEmailUserName);
 }
