@@ -1,5 +1,4 @@
-Login Dialog Requirements
--------------------------
+# Login Dialog Requirements
 
 ## Requirements for Bare Functionality
 
