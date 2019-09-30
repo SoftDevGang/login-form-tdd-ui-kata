@@ -3,7 +3,7 @@ package org.codecop.loginform;
 import org.codecop.auth.AuthenticationResult;
 import org.codecop.auth.AuthenticationService;
 
-public class LoginPresenter {
+public class LoginPresenter implements LoginListener {
 
     private final LoginModel model;
     private final LoginView view;
@@ -13,33 +13,21 @@ public class LoginPresenter {
         this.model = model;
         this.view = view;
         this.authenticationService = authenticationService;
-        view.registerLoginListener(new LoginListener() {
 
-            @Override
-            public void lookupChanged(String lookup) {
-                LoginPresenter.this.lookupChanged(lookup);
-            }
-
-            @Override
-            public void passwordChanged(String password) {
-                LoginPresenter.this.passwordChanged(password);
-            }
-
-            @Override
-            public void loginButtonClicked() {
-                LoginPresenter.this.loginButtonClicked();
-            }
-        });
+        view.registerLoginListener(this);
     }
 
+    @Override
     public void lookupChanged(String newLookup) {
         model.setLookup(newLookup);
     }
 
+    @Override
     public void passwordChanged(String newPassword) {
         model.setPassword(newPassword);
     }
 
+    @Override
     public void loginButtonClicked() {
         new Thread(() -> {
             AuthenticationResult result = authenticationService.authenticate(model.getLookup(), model.getPassword());

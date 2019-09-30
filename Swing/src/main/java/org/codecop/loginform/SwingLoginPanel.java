@@ -1,7 +1,6 @@
 package org.codecop.loginform;
 
 import java.awt.Color;
-import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
 
 import org.codecop.swing.AllDocumentListener;
 
@@ -31,13 +29,11 @@ public class SwingLoginPanel extends JPanel implements LoginView {
 
     private void createLookupField() {
         lookupField.setName("LookupField");
-
         add(lookupField);
     }
 
     private void createPasswordField() {
         passwordField.setName("PasswordField");
-
         add(passwordField);
     }
 
