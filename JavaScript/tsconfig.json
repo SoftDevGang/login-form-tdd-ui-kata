@@ -1,0 +1,33 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    // see https://www.typescriptlang.org/docs/handbook/compiler-options.html
+    "target": "es5",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    // "module": "commonjs":
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src/**/*.js",
+    "test/**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
