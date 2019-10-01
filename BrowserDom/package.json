@@ -18,7 +18,7 @@
   },
   "scripts": {
     "lint": "tslint --project .",
-    "test": "mocha",
-    "watch": "mocha -w"
+    "test": "mocha test/**/*.js",
+    "watch": "mocha -w test/**/*.js"
   }
 }
