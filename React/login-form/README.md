@@ -1,3 +1,8 @@
+The Testing stuff was inspired by https://testing-library.com/docs/react-testing-library/example-intro
+
+The stuff below is generated when bootstrapping the application. 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
