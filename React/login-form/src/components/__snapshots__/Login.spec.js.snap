@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Rendering login should render properly 1`] = `
+<div>
+  <input
+    name="userName"
+    placeholder="user name"
+    required="required"
+    type="text"
+  />
+  <label
+    htmlFor="userName"
+  >
+    User name:
+  </label>
+  <input
+    name="password"
+    placeholder="password"
+    required="required"
+    type="text"
+  />
+  <label
+    htmlFor="password"
+  >
+    Password:
+  </label>
+  <input
+    name="submit"
+    onClick={[Function]}
+    type="button"
+    value="Sign in"
+  />
+</div>
+`;
