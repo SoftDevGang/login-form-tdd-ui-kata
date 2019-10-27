@@ -18,6 +18,8 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class HelloUI extends UI {
 
+    private static final long serialVersionUID = -8092198794020028852L;
+
     /**
      * The UI is initialised. This method is intended to be overridden to add component to the user interface and
      * initialise non-component functionality.
@@ -42,5 +44,7 @@ public class HelloUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "HelloUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = HelloUI.class, productionMode = false)
     public static class HelloUIServlet extends VaadinServlet {
+
+        private static final long serialVersionUID = -8308587615027111707L;
     }
 }
