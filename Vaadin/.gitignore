@@ -13,8 +13,6 @@
 # Maven
 target
 
-# JS
-node
-node_modules
-webpack.generated.js
-/bin/
+# Vaadin
+**/styles.css
+**/styles.scss.cache
