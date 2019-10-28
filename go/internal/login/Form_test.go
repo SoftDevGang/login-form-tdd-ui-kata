@@ -12,6 +12,13 @@ type TestingUI struct {
 	buttonCalled bool
 	buttonText   string
 	buttonBounds rl.Rectangle
+
+	textBoxCalled bool
+}
+
+func (ui *TestingUI) TextBox(bounds rl.Rectangle, text string) string {
+	ui.textBoxCalled = true
+	return text
 }
 
 func (ui *TestingUI) Button(bounds rl.Rectangle, text string) bool {
@@ -20,6 +27,9 @@ func (ui *TestingUI) Button(bounds rl.Rectangle, text string) bool {
 	ui.buttonBounds = bounds
 	return false
 }
+
+// * There is a "Log in" button in right corner of the dialog.
+// right corner is design.
 
 func TestForm_LoginButton(t *testing.T) {
 	var form login.Form
@@ -59,3 +69,20 @@ func TestForm_LoginButtonBounds(t *testing.T) {
 	// If we would use 1 screen shot for the layout in the end (Approvals), then we would not need
 	// to assert the button, color, text etc. We would only test that button triggers.
 }
+
+// * There is a user name field, which is limited to 20 characters.
+
+func TestForm_UserNameField(t *testing.T) {
+	var form login.Form
+	var ui TestingUI
+	form.Render(&ui)
+	if !ui.textBoxCalled {
+		t.Errorf("not found")
+	}
+}
+
+// * The label "Phone, email or username" is next to the input field.
+// * There is a password field, which is limited to 20 characters.
+// * The password is either visible as asterisk or bullet signs.
+// * The label "Password" is next to the input field.
+// * There is a label in a red box above the button(s). It is only visible if there is an error.
