@@ -1,4 +1,4 @@
-module github.com/SoftDevGang/login-form-tdd-ui-kata/go
+module github.com/SoftDevGang/login-form-tdd-ui-kata/raylib-Go
 
 go 1.13
 
