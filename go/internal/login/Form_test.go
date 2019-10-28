@@ -174,19 +174,19 @@ func TestForm_UserNameFieldInputLimited(t *testing.T) {
 
 // ***** There is a password field, which is limited to 20 characters. *****
 
-// func TestForm_PasswordField(t *testing.T) {
-// 	var form login.Form
-// 	ui := newTestingUI()
-//
-// 	form.Render(ui)
-//
-// 	if !ui.textBoxCalledFor("password") {
-// 		t.Errorf("not found")
-// 	}
-// 	// now we need an ID of the field because we have 2.
-// 	// * use order of invocations -> can NOT reorder statements on refactor.
-// 	// * add ID to our API (only for tests). IDs are used in other library imgui as well.
-// }
+func TestForm_PasswordField(t *testing.T) {
+	var form login.Form
+	ui := newTestingUI()
+
+	form.Render(ui)
+
+	if !ui.textBoxCalled["password"] {
+		t.Errorf("not found")
+	}
+	// now we need an ID of the field because we have 2.
+	// * use order of invocations -> can NOT reorder statements on refactor.
+	// * add ID to our API (only for tests). IDs are used in other library imgui as well.
+}
 
 // ***** The password is either visible as asterisk or bullet signs. *****
 // ***** The label "Password" is next to the input field. *****
