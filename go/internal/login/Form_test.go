@@ -9,11 +9,27 @@ import (
 	"github.com/SoftDevGang/login-form-tdd-ui-kata/go/internal/login"
 )
 
+type testingAuthenticator struct {
+	called bool
+	user   string
+	pass   string
+
+	err error
+}
+
+func (a *testingAuthenticator) Authenticate(user, pass string) error {
+	a.called = true
+	a.user = user
+	a.pass = pass
+	return a.err
+}
+
 // UI simulation.
 type testingUI struct {
-	buttonCalled map[string]bool
-	buttonText   map[string]string
-	buttonBounds map[string]rl.Rectangle
+	buttonCalled  map[string]bool
+	buttonText    map[string]string
+	buttonBounds  map[string]rl.Rectangle
+	buttonResults map[string]bool
 
 	textBoxCalled    map[string]bool
 	textBoxText      map[string]string
@@ -25,6 +41,7 @@ func newTestingUI() *testingUI {
 		buttonCalled:     make(map[string]bool),
 		buttonText:       make(map[string]string),
 		buttonBounds:     make(map[string]rl.Rectangle),
+		buttonResults:    make(map[string]bool),
 		textBoxCalled:    make(map[string]bool),
 		textBoxText:      make(map[string]string),
 		textBoxUserInput: make(map[string]string),
@@ -45,7 +62,7 @@ func (ui *testingUI) Button(id string, bounds rl.Rectangle, text string) bool {
 	ui.buttonCalled[id] = true
 	ui.buttonText[id] = text
 	ui.buttonBounds[id] = bounds
-	return false
+	return ui.buttonResults[id]
 }
 
 // ***** There is a "Log in" button in right corner of the dialog. *****
@@ -215,3 +232,25 @@ func TestForm_PasswordFieldIsDisplayedMasked(t *testing.T) {
 // skip tests, similar to 1st label
 
 // ***** There is a label in a red box above the button(s). It is only visible if there is an error. *****
+
+// need test to not show error message when empty
+// need test to show error message when not empty
+// need test error message is red (LabelEx) - maybe not test because styling
+
+// ***** User name and password given, button "Log in" clicked, backend reports success, dialog is closed. *****
+
+func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
+	var form login.Form
+	var authenticator testingAuthenticator
+	form.Authenticator = &authenticator
+	ui := newTestingUI()
+
+	ui.buttonResults["login"] = true
+	form.Render(ui)
+
+	if !authenticator.called {
+		t.Errorf("authenticator not called")
+	}
+}
+
+// ***** User name and password given, button "Log in" clicked, backend reports no success, show message in error line. *****

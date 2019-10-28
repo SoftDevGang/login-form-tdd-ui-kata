@@ -5,12 +5,14 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
+// MVx: This is the view interface. Independent of UI technology. But not MVP because it is NOT domain specific.
 type FormUI interface {
 	Button(id string, bounds rl.Rectangle, text string) bool
 	TextBox(id string, bounds rl.Rectangle, text string) string
 	Label(id string, bounds rl.Rectangle, text string)
 }
 
+// MVC: This is the view implementation. Only here dependency to Raylib.
 type RaylibFormUI struct{}
 
 func (ui *RaylibFormUI) Button(id string, bounds rl.Rectangle, text string) bool {
@@ -27,12 +29,16 @@ func (ui *RaylibFormUI) Label(id string, bounds rl.Rectangle, text string) {
 
 const UserNameLimit = 20
 
+// MVx: This is the (UI) model. It contains all state of the UI. Also this is the controller.
 // Form renders the controls for providing the necessary login credentials.
 type Form struct {
 	UserName string // Go style export more than we usually do.
 	Password string
+
+	Authenticator Authenticator
 }
 
+// MVx: This is the controller or presenter.
 func (form *Form) Render(ui FormUI) {
 	userNameLabelBounds := rl.Rectangle{}
 	ui.Label("username", userNameLabelBounds, "Phone, email or username")
@@ -55,5 +61,7 @@ func (form *Form) Render(ui FormUI) {
 	form.Password = ui.TextBox("password", passwordBounds, form.Password)
 
 	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
-	ui.Button("login", buttonBounds, "Log in")
+	if ui.Button("login", buttonBounds, "Log in") {
+		_ = form.Authenticator.Authenticate(form.UserName, form.Password)
+	}
 }
