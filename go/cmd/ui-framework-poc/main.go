@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gen2brain/raylib-go/raylib" // nolint: goimports
+	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 // main showcases a basic "hello world" example of running a raylib window.
