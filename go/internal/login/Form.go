@@ -17,9 +17,11 @@ func (ui *RaylibFormUI) Button(label string) bool {
 }
 
 // Form renders the controls for providing the necessary login credentials.
-type Form struct{}
+type Form struct {
+	UserName string // Go style export more than we usually do.
+}
 
-func (form Form) Render(ui FormUI) {
-	ui.TextBox(rl.Rectangle{}, "")
+func (form *Form) Render(ui FormUI) {
+	form.UserName = ui.TextBox(rl.Rectangle{}, "foo")
 	ui.Button(rl.Rectangle{235, 165, 345, 195}, "Log in")
 }

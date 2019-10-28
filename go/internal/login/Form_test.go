@@ -13,12 +13,13 @@ type TestingUI struct {
 	buttonText   string
 	buttonBounds rl.Rectangle
 
-	textBoxCalled bool
+	textBoxCalled    bool
+	textBoxUserInput string
 }
 
 func (ui *TestingUI) TextBox(bounds rl.Rectangle, text string) string {
 	ui.textBoxCalled = true
-	return text
+	return ui.textBoxUserInput
 }
 
 func (ui *TestingUI) Button(bounds rl.Rectangle, text string) bool {
@@ -80,6 +81,39 @@ func TestForm_UserNameField(t *testing.T) {
 		t.Errorf("not found")
 	}
 }
+
+// ignoring design
+
+// TODO: test for initial text empty
+
+func TestForm_UserNameFieldInputKept(t *testing.T) {
+	var form login.Form
+	var ui TestingUI
+	ui.textBoxUserInput = "hello"
+	form.Render(&ui)
+
+	// we test whether the form keeps input
+	if form.UserName != "hello" {
+		t.Errorf("not kept")
+	}
+	// need more tests because UI lib is IM/stateless?
+	// Peter surprised that I need to test for keeping the state.
+	// Christian says he is used to having the "UI model" of the IM state.
+	// Maybe the missing state makes it easier to separate?
+}
+
+// func TestForm_UserNameFieldInputDisplayed(t *testing.T) {
+// 	var form login.Form
+// 	var ui TestingUI
+// 	ui.textBoxUserInput = "hello"
+// 	form.Render(&ui)
+//
+// 	// we test whether the next render call receives the new text
+// 	form.Render(&ui)
+// 	if ui.textBoxText != "hello" {
+// 		t.Errorf("not accepted")
+// 	}
+// }
 
 // * The label "Phone, email or username" is next to the input field.
 // * There is a password field, which is limited to 20 characters.
