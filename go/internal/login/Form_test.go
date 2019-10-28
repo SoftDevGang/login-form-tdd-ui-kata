@@ -52,7 +52,10 @@ func newTestingUI() *testingUI {
 func (ui *testingUI) TextBox(id string, bounds rl.Rectangle, text string) string {
 	ui.textBoxCalled[id] = true
 	ui.textBoxText[id] = text
-	return ui.textBoxUserInput[id]
+	if input, hasInput := ui.textBoxUserInput[id]; hasInput {
+		return input
+	}
+	return text
 }
 
 func (ui *testingUI) Label(id string, bounds rl.Rectangle, text string) {
@@ -246,10 +249,19 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	ui := newTestingUI()
 
 	ui.buttonResults["login"] = true
+	username, password := "user1", "secret2"
+	form.UserName = username
+	form.Password = password
 	form.Render(ui)
 
 	if !authenticator.called {
 		t.Errorf("authenticator not called")
+	}
+	if authenticator.user != username {
+		t.Errorf("wrong username passed")
+	}
+	if authenticator.pass != password {
+		t.Errorf("wrong password passed")
 	}
 }
 
