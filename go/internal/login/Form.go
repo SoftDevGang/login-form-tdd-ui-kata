@@ -6,7 +6,7 @@ import (
 )
 
 type FormUI interface {
-	Button(label string) bool
+	Button(bounds rl.Rectangle, text string) bool
 }
 
 type RaylibFormUI struct{}
@@ -19,5 +19,5 @@ func (ui *RaylibFormUI) Button(label string) bool {
 type Form struct{}
 
 func (form Form) Render(ui FormUI) {
-	ui.Button("Log in")
+	ui.Button(rl.Rectangle{235, 165, 345, 195}, "Log in")
 }
