@@ -4,37 +4,43 @@
 
 ### Existing Code "Backend"
 
-Depending on the used technology, assume an Authentication service, facade or end point. It has a method to `authenticate` a user based on the user's phone, email or user name and her password. The call returns an `AuthenticationResult` which indicates success and an optional message. From now on the combination of a user's phone, email or user name is called the user's lookup.
+Depending on the used technology, assume an `Authentication` service, facade or end point. It has a method to `authenticate` a user based on the user's phone, email or user name and her password. The call returns an `AuthenticationResult` which indicates success and an optional message. From now on the combination of a user's phone, email or user name is called the user's lookup.
 
 ### Login
 
-UI
+#### UI
 
 * There is a user name field, which is limited to 20 characters.
-* The label "Phone, email or username" is next to the input field.
+* The label "Phone, email or username" is left, next to the input field.
 * There is a password field, which is limited to 20 characters.
 * The password is either visible as asterisk or bullet signs.
-* The label "Password" is next to the input field.
-* There is a label in a red box above the button(s). It is only visible if there is an error.
-* There is a "Log in" button in right corner of the dialog.
+* The label "Password" is left, next to the input field.
+* There is a label in a red box above the button(s). It is only visible if there was an error.
+* There is a "Log in" button in right corner of the window.
 
-Logic
+#### Logic
 
-* User name and password given, button "Log in" clicked, backend reports success, dialog is closed.
-* User name and password given, button "Log in" clicked, backend reports no success, show message in error line.
+The logic uses the `Authentication` backend described above. Calls to the backend might take some time (i.e. might block), so these calls must done **asynchronously**.
+
+* User name and password given, button "Log in" clicked, backend reports success, then the form is closed.
+* User name and password given, button "Log in" clicked, backend reports an error, show message in error line, form stays open.
+* When "Log in" is clicked, while the backend is working, the button stays disabled.
 
 ![sketch of the bare login](./SketchBare.png)
 
 ## Requirements for More/Optional Functionality
+
+* While the backend is working, the mouse cursor is indicating busy.
+* While the backend is working, a dedicated "Cancel" button is displayed, which cancels the backend.
 
 ### More Logic in View
 
 * Username is blank, "Log in" button is inactive.
 * Password is blank, "Log in" button is inactive.
 
-### More UI Elements
+### More (Static) UI Elements
 
-* Dialog title or page title or border title is "Login to Clean Code Center"
+* Window  title or page title or border title is "Login to Clean Code Center"
 * The Code Cop logo is displayed on top of the window, centred. See [ApplicationLogo](./ApplicationLogo.gif).
 * The message "Welcome to Clean Code Center!" is displayed, centred below the logo.
 
@@ -51,7 +57,7 @@ Logic
 
 ### UI Setup
 
-Focus and tab order
+#### Focus and tab order
 
 * When it opens, user name field is focused. The focus is shown by a yellow rectangle around the field.
 * Tab moves focus through fields: user name, password, ..., Log in button.
@@ -61,17 +67,17 @@ Focus and tab order
 * There is a link or button "Forgot Password" in bottom, left corner.
 * There is a check box "Remember Me". If it is enabled, the backend is notified after a successful login.
 
-### More Interactions between UI and Presenter
+### More Interactions between UI and Logic
 
 * Enter on user name field triggers log in.
 * Enter on password field triggers log in.
 
-Show Password
+#### Show Password
 
 * There is a check box "Show Password" below the password input field, initially off.
 * If Show Password is enabled, the password is visible. If it is disabled, the password is invisible again. This happens during typing.
 
-Caps Lock Warning
+#### Caps Lock Warning
 
 * While typing in user name field, if Caps Lock is on, display a warning next to field "Caps Lock is on".
 * While typing in password field, if Caps Lock is on, display a warning next to field "Caps Lock is on".
@@ -79,7 +85,7 @@ Caps Lock Warning
   An icon `icon-library.net_error-image-icon-11` is provided.
   Taken from [Error Image Icon #95188](https://icon-library.net/icon/error-image-icon-11.html).
 
-Captcha
+#### Captcha
 
 * A Captcha is displayed on 10+ try to login unsuccessfully. Refresh Captcha on each try.
 
