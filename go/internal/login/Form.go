@@ -73,7 +73,10 @@ func (form *Form) Render(ui FormUI) bool {
 	}
 
 	if form.Authentication.InProgress {
-		return form.Authentication.poll()
+		if done, err := form.Authentication.poll(); done {
+			// TODO update error message label
+			return err == nil
+		}
 	}
 
 	return false
@@ -88,13 +91,12 @@ func (auth *Authentication) start(userName, password string) {
 	}()
 }
 
-func (auth *Authentication) poll() bool {
+func (auth *Authentication) poll() (bool, error) {
 	select {
-	case <-auth.resultChannel:
-		// auth.authenticationResult = result
+	case result := <-auth.resultChannel:
 		auth.InProgress = false
-		return true
+		return true, result
 	default:
 	}
-	return false
+	return false, nil
 }

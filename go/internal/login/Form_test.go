@@ -1,6 +1,7 @@
 package login_test
 
 import (
+	"errors"
 	"strings"
 	"sync"
 	"testing"
@@ -342,7 +343,7 @@ func TestForm_LoginNotComplete(t *testing.T) {
 	}
 }
 
-func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
+func TestForm_SignalsAuthenticatingSuccess(t *testing.T) {
 	username, password := "user1", "secret2"
 	var form login.Form
 	authenticator := newTestingAuthenticator()
@@ -363,3 +364,24 @@ func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
 }
 
 // ***** User name and password given, button "Log in" clicked, backend reports no success, show message in error line. *****
+
+func TestForm_SignalsAuthenticatingFailure(t *testing.T) {
+	username, password := "user1", "secret2"
+	var form login.Form
+	authenticator := newTestingAuthenticator()
+	authenticator.err = errors.New("nope")
+	form.Authentication.Authenticator = authenticator
+	ui := newTestingUI()
+
+	form.UserName = username
+	form.Password = password
+	ui.buttonResults["login"] = true
+	form.Render(ui)
+
+	authenticator.started.Wait()
+	authenticator.completed.Done()
+	result := renderWhile(func() bool { return form.Authentication.InProgress }, &form, ui)
+	if result {
+		t.Errorf("successful although shouldn't")
+	}
+}
