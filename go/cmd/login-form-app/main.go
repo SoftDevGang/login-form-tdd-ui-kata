@@ -1,9 +1,26 @@
 package main
 
-import "fmt"
+import (
+	rl "github.com/gen2brain/raylib-go/raylib"
+
+	"github.com/SoftDevGang/login-form-tdd-ui-kata/go/internal/login"
+)
 
 func main() {
-	// Setup UI framework, main loop, ...
-	// render & process login form
-	fmt.Println("This is where the magic happens.")
+	rl.InitWindow(800, 450, "raylib [core] example - basic window")
+	rl.SetTargetFPS(20)
+
+	var form login.Form
+	var ui login.RaylibFormUI
+
+	for !rl.WindowShouldClose() {
+		rl.BeginDrawing()
+		rl.ClearBackground(rl.RayWhite)
+
+		form.Render(&ui)
+
+		rl.EndDrawing()
+	}
+
+	rl.CloseWindow()
 }
