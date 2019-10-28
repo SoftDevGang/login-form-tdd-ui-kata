@@ -315,25 +315,53 @@ func TestForm_IsBusyWhileAuthenticating(t *testing.T) {
 	}
 }
 
-func renderWhile(condition func() bool, form *login.Form, ui login.FormUI) {
+func renderWhile(condition func() bool, form *login.Form, ui login.FormUI) bool {
+	result := false
 	endTime := time.Now().Add(time.Second * 3)
 	for condition() {
-		form.Render(ui)
+		result = form.Render(ui)
 		now := time.Now()
 		if now.After(endTime) {
-			break
+			return result
 		}
+	}
+	return result
+}
+
+// skip test login button not allowed when busy, we see how it would look like
+//   form.Render(ui) // -> renders form disabled (no button, whatever ...)
+
+func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
+	t.SkipNow()
+
+	username, password := "user1", "secret2"
+	var form login.Form
+	authenticator := newTestingAuthenticator()
+	form.Authentication.Authenticator = authenticator
+	ui := newTestingUI()
+
+	form.UserName = username
+	form.Password = password
+	ui.buttonResults["login"] = true
+	form.Render(ui)
+
+	authenticator.started.Wait()
+	authenticator.completed.Done()
+	result := renderWhile(func() bool { return form.Authentication.InProgress }, &form, ui)
+	if !result {
+		t.Errorf("not successful")
 	}
 }
 
-/*
-TODO test login button not allowed when busy
-form.Render(ui) // -> renders form disabled (no button, whatever ...)
-
-authenticator.completed.Done()
-
-form.Render(ui) // -> should return true
-}
-*/
-
 // ***** User name and password given, button "Log in" clicked, backend reports no success, show message in error line. *****
+
+func TestForm_LoginNotComplete(t *testing.T) {
+	var form login.Form
+	ui := newTestingUI()
+
+	result := form.Render(ui)
+
+	if result {
+		t.Errorf("is complete")
+	}
+}

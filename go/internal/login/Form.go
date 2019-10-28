@@ -44,7 +44,7 @@ type Form struct {
 }
 
 // MVx: This is the controller or presenter.
-func (form *Form) Render(ui FormUI) {
+func (form *Form) Render(ui FormUI) bool {
 	userNameLabelBounds := rl.Rectangle{}
 	ui.Label("username", userNameLabelBounds, "Phone, email or username")
 
@@ -66,6 +66,8 @@ func (form *Form) Render(ui FormUI) {
 	form.Password = ui.TextBox("password", passwordBounds, form.Password)
 
 	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
+
+	// could move out Authentication to be sibling of Form, in a LoginStage oder LoginService or whatever.
 	if ui.Button("login", buttonBounds, "Log in") {
 		form.Authentication.start(form.UserName, form.Password)
 	}
@@ -73,6 +75,8 @@ func (form *Form) Render(ui FormUI) {
 	if form.Authentication.InProgress {
 		form.Authentication.poll()
 	}
+
+	return false
 }
 
 func (auth *Authentication) start(userName, password string) {
