@@ -22,6 +22,6 @@ type Form struct {
 }
 
 func (form *Form) Render(ui FormUI) {
-	form.UserName = ui.TextBox(rl.Rectangle{}, "foo")
+	form.UserName = ui.TextBox(rl.Rectangle{}, form.UserName)
 	ui.Button(rl.Rectangle{235, 165, 345, 195}, "Log in")
 }

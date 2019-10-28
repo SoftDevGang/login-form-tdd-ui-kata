@@ -8,21 +8,24 @@ import (
 	"github.com/SoftDevGang/login-form-tdd-ui-kata/go/internal/login"
 )
 
-type TestingUI struct {
+// UI simulation.
+type testingUI struct {
 	buttonCalled bool
 	buttonText   string
 	buttonBounds rl.Rectangle
 
 	textBoxCalled    bool
-	textBoxUserInput string
+	textBoxText      string
+	textBoxUserInput string // User interaction could stand out from other fields?
 }
 
-func (ui *TestingUI) TextBox(bounds rl.Rectangle, text string) string {
+func (ui *testingUI) TextBox(bounds rl.Rectangle, text string) string {
 	ui.textBoxCalled = true
+	ui.textBoxText = text
 	return ui.textBoxUserInput
 }
 
-func (ui *TestingUI) Button(bounds rl.Rectangle, text string) bool {
+func (ui *testingUI) Button(bounds rl.Rectangle, text string) bool {
 	ui.buttonCalled = true
 	ui.buttonText = text
 	ui.buttonBounds = bounds
@@ -34,8 +37,10 @@ func (ui *TestingUI) Button(bounds rl.Rectangle, text string) bool {
 
 func TestForm_LoginButton(t *testing.T) {
 	var form login.Form
-	var ui TestingUI
+	var ui testingUI
+
 	form.Render(&ui)
+
 	if !ui.buttonCalled {
 		t.Errorf("not found")
 	}
@@ -43,8 +48,10 @@ func TestForm_LoginButton(t *testing.T) {
 
 func TestForm_LoginButtonText(t *testing.T) {
 	var form login.Form
-	var ui TestingUI
+	var ui testingUI
+
 	form.Render(&ui)
+
 	if "Log in" != ui.buttonText {
 		t.Errorf("is not \"Log in\"")
 	}
@@ -57,8 +64,10 @@ func TestForm_LoginButtonBounds(t *testing.T) {
 	// 3. we ignore coordinates and check manually -> need to update all calls later
 	// 4. we use Raylib coordinates and just mock what is hurting us -> use Raylib in tests
 	var form login.Form
-	var ui TestingUI
+	var ui testingUI
+
 	form.Render(&ui)
+
 	// first idea: if ui.buttonCoordinate != BottomRight {
 	expectedBounds := rl.Rectangle{235, 165, 235 + 110, 165 + 30} // needed to open GIMP
 	if ui.buttonBounds != expectedBounds {
@@ -75,8 +84,10 @@ func TestForm_LoginButtonBounds(t *testing.T) {
 
 func TestForm_UserNameField(t *testing.T) {
 	var form login.Form
-	var ui TestingUI
+	var ui testingUI
+
 	form.Render(&ui)
+
 	if !ui.textBoxCalled {
 		t.Errorf("not found")
 	}
@@ -88,8 +99,9 @@ func TestForm_UserNameField(t *testing.T) {
 
 func TestForm_UserNameFieldInputKept(t *testing.T) {
 	var form login.Form
-	var ui TestingUI
+	var ui testingUI
 	ui.textBoxUserInput = "hello"
+
 	form.Render(&ui)
 
 	// we test whether the form keeps input
@@ -102,18 +114,18 @@ func TestForm_UserNameFieldInputKept(t *testing.T) {
 	// Maybe the missing state makes it easier to separate?
 }
 
-// func TestForm_UserNameFieldInputDisplayed(t *testing.T) {
-// 	var form login.Form
-// 	var ui TestingUI
-// 	ui.textBoxUserInput = "hello"
-// 	form.Render(&ui)
-//
-// 	// we test whether the next render call receives the new text
-// 	form.Render(&ui)
-// 	if ui.textBoxText != "hello" {
-// 		t.Errorf("not accepted")
-// 	}
-// }
+func TestForm_UserNameFieldInputDisplayed(t *testing.T) {
+	var form login.Form
+	form.UserName = "username"
+	var ui testingUI
+
+	form.Render(&ui)
+
+	// we test whether the next render call receives the new text
+	if ui.textBoxText != "username" {
+		t.Errorf("not displayed")
+	}
+}
 
 // * The label "Phone, email or username" is next to the input field.
 // * There is a password field, which is limited to 20 characters.
