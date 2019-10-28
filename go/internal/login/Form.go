@@ -73,7 +73,7 @@ func (form *Form) Render(ui FormUI) bool {
 	}
 
 	if form.Authentication.InProgress {
-		form.Authentication.poll()
+		return form.Authentication.poll()
 	}
 
 	return false
@@ -88,11 +88,13 @@ func (auth *Authentication) start(userName, password string) {
 	}()
 }
 
-func (auth *Authentication) poll() {
+func (auth *Authentication) poll() bool {
 	select {
 	case <-auth.resultChannel:
 		// auth.authenticationResult = result
 		auth.InProgress = false
+		return true
 	default:
 	}
+	return false
 }

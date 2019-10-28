@@ -331,9 +331,18 @@ func renderWhile(condition func() bool, form *login.Form, ui login.FormUI) bool 
 // skip test login button not allowed when busy, we see how it would look like
 //   form.Render(ui) // -> renders form disabled (no button, whatever ...)
 
-func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
-	t.SkipNow()
+func TestForm_LoginNotComplete(t *testing.T) {
+	var form login.Form
+	ui := newTestingUI()
 
+	result := form.Render(ui)
+
+	if result {
+		t.Errorf("is complete")
+	}
+}
+
+func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
 	username, password := "user1", "secret2"
 	var form login.Form
 	authenticator := newTestingAuthenticator()
@@ -354,14 +363,3 @@ func TestForm_ReturnTrueWhenAuthenticatingSuccess(t *testing.T) {
 }
 
 // ***** User name and password given, button "Log in" clicked, backend reports no success, show message in error line. *****
-
-func TestForm_LoginNotComplete(t *testing.T) {
-	var form login.Form
-	ui := newTestingUI()
-
-	result := form.Render(ui)
-
-	if result {
-		t.Errorf("is complete")
-	}
-}
