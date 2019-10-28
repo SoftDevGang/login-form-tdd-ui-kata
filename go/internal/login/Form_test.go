@@ -1,6 +1,7 @@
 package login_test
 
 import (
+	"strings"
 	"testing"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -95,8 +96,6 @@ func TestForm_UserNameField(t *testing.T) {
 
 // ignoring design
 
-// TODO: test for initial text empty
-
 func TestForm_UserNameFieldInputKept(t *testing.T) {
 	var form login.Form
 	var ui testingUI
@@ -124,6 +123,22 @@ func TestForm_UserNameFieldInputDisplayed(t *testing.T) {
 	// we test whether the next render call receives the new text
 	if ui.textBoxText != "username" {
 		t.Errorf("not displayed")
+	}
+}
+
+// test for initial text empty skipped, it is empty.
+
+func TestForm_UserNameFieldInputLimited(t *testing.T) {
+	original := strings.Repeat("a", login.UserNameLimit)
+	var form login.Form
+	form.UserName = original
+	var ui testingUI
+	ui.textBoxUserInput = form.UserName + "f"
+
+	form.Render(&ui)
+
+	if form.UserName != original {
+		t.Errorf("not limited \"%v\"", form.UserName)
 	}
 }
 
