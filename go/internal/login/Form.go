@@ -29,15 +29,18 @@ func (ui *RaylibFormUI) Label(id string, bounds rl.Rectangle, text string) {
 
 const UserNameLimit = 20
 
+type Authentication struct {
+	InProgress    bool
+	Authenticator Authenticator
+	resultChannel chan error
+}
+
 // MVx: This is the (UI) model. It contains all state of the UI. Also this is the controller.
 // Form renders the controls for providing the necessary login credentials.
 type Form struct {
-	UserName string // Go style export more than we usually do.
-	Password string
-
-	Busy                  bool
-	Authenticator         Authenticator
-	authenticationChannel chan error
+	UserName       string // Go style export more than we usually do.
+	Password       string
+	Authentication Authentication
 }
 
 // MVx: This is the controller or presenter.
@@ -64,20 +67,28 @@ func (form *Form) Render(ui FormUI) {
 
 	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
 	if ui.Button("login", buttonBounds, "Log in") {
-		form.Busy = true
-		form.authenticationChannel = make(chan error)
-
-		go func() {
-			result := form.Authenticator.Authenticate(form.UserName, form.Password)
-			form.authenticationChannel <- result
-		}()
+		form.Authentication.start(form.UserName, form.Password)
 	}
-	if form.Busy {
-		select {
-		case <-form.authenticationChannel:
-			// form.authenticationResult = result
-			form.Busy = false
-		default:
-		}
+
+	if form.Authentication.InProgress {
+		form.Authentication.poll()
+	}
+}
+
+func (auth *Authentication) start(userName, password string) {
+	auth.InProgress = true
+	auth.resultChannel = make(chan error)
+	go func() {
+		result := auth.Authenticator.Authenticate(userName, password)
+		auth.resultChannel <- result
+	}()
+}
+
+func (auth *Authentication) poll() {
+	select {
+	case <-auth.resultChannel:
+		// auth.authenticationResult = result
+		auth.InProgress = false
+	default:
 	}
 }

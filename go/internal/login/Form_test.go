@@ -265,7 +265,7 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	username, password := "user1", "secret2"
 	var form login.Form
 	authenticator := newTestingAuthenticator()
-	form.Authenticator = authenticator
+	form.Authentication.Authenticator = authenticator
 	ui := newTestingUI()
 
 	form.UserName = username
@@ -285,11 +285,12 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	}
 	authenticator.completed.Done()
 }
+
 func TestForm_IsBusyWhileAuthenticating(t *testing.T) {
 	username, password := "user1", "secret2"
 	var form login.Form
 	authenticator := newTestingAuthenticator()
-	form.Authenticator = authenticator
+	form.Authentication.Authenticator = authenticator
 	ui := newTestingUI()
 
 	form.UserName = username
@@ -297,33 +298,36 @@ func TestForm_IsBusyWhileAuthenticating(t *testing.T) {
 	ui.buttonResults["login"] = true
 	form.Render(ui)
 
-	if !form.Busy {
+	if !form.Authentication.InProgress {
 		t.Errorf("not busy at start")
 	}
 
 	authenticator.started.Wait()
-
 	form.Render(ui)
-	if !form.Busy {
+	if !form.Authentication.InProgress {
 		t.Errorf("not busy during authentication")
 	}
 
 	authenticator.completed.Done()
+	renderWhile(func() bool { return form.Authentication.InProgress }, &form, ui)
+	if form.Authentication.InProgress {
+		t.Errorf("busy when finished")
+	}
+}
 
+func renderWhile(condition func() bool, form *login.Form, ui login.FormUI) {
 	endTime := time.Now().Add(time.Second * 3)
-	for form.Busy {
+	for condition() {
 		form.Render(ui)
 		now := time.Now()
 		if now.After(endTime) {
 			break
 		}
 	}
-	if form.Busy {
-		t.Errorf("busy when finished")
-	}
 }
 
 /*
+TODO test login button not allowed when busy
 form.Render(ui) // -> renders form disabled (no button, whatever ...)
 
 authenticator.completed.Done()
