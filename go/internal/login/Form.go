@@ -16,7 +16,7 @@ type FormUI interface {
 type RaylibFormUI struct{}
 
 func (ui *RaylibFormUI) Button(id string, bounds rl.Rectangle, text string) bool {
-	return raygui.Button(rl.Rectangle{}, text)
+	return raygui.Button(bounds, text)
 }
 
 func (ui *RaylibFormUI) TextBox(id string, bounds rl.Rectangle, text string) string {
@@ -45,11 +45,11 @@ type Form struct {
 
 // MVx: This is the controller or presenter.
 func (form *Form) Render(ui FormUI) bool {
-	userNameLabelBounds := rl.Rectangle{}
+	userNameLabelBounds := rl.Rectangle{X: 0, Y: 40, Width: 200, Height: 30}
 	ui.Label("username", userNameLabelBounds, "Phone, email or username")
 
 	// TODO move out bounds to map of [id]bounds into UI type.
-	userNameBounds := rl.Rectangle{X: 0, Y: 40, Width: 100, Height: 30}
+	userNameBounds := rl.Rectangle{X: 300, Y: 40, Width: 200, Height: 30}
 	// Idea is to move out the bounds into the ui, because the id gives a 1:1 lookup
 	// on the bounds. We do not assert the bounds in unit test, so we do not need to
 	// have them here. We said it's styling and will be asserted using a single screen shot
@@ -62,10 +62,13 @@ func (form *Form) Render(ui FormUI) bool {
 		form.UserName = form.UserName[:UserNameLimit]
 	}
 
-	passwordBounds := rl.Rectangle{X: 0, Y: 80, Width: 100, Height: 30}
+	passwordLabelBounds := rl.Rectangle{X: 0, Y: 80, Width: 200, Height: 30}
+	ui.Label("password", passwordLabelBounds, "Password:")
+
+	passwordBounds := rl.Rectangle{X: 300, Y: 80, Width: 200, Height: 30}
 	form.Password = ui.TextBox("password", passwordBounds, form.Password)
 
-	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
+	buttonBounds := rl.Rectangle{X: 300, Y: 165, Width: 110, Height: 30}
 
 	// could move out Authentication to be sibling of Form, in a LoginStage oder LoginService or whatever.
 	if ui.Button("login", buttonBounds, "Log in") {

@@ -125,7 +125,7 @@ func TestForm_LoginButtonBounds(t *testing.T) {
 	form.Render(ui)
 
 	// first idea: if ui.buttonCoordinate != BottomRight {
-	expectedBounds := rl.Rectangle{235, 165, 235 + 110, 165 + 30} // needed to open GIMP
+	expectedBounds := rl.Rectangle{300, 165, 110, 30} // needed to open GIMP
 	if ui.buttonBounds["login"] != expectedBounds {
 		t.Errorf("expected %v, but was %v", expectedBounds, ui.buttonBounds)
 	}
