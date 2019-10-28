@@ -188,6 +188,30 @@ func TestForm_PasswordField(t *testing.T) {
 	// * add ID to our API (only for tests). IDs are used in other library imgui as well.
 }
 
+// skip tests for state, similar to 1st field
+// skip tests for limit, similar to 1st field
+
 // ***** The password is either visible as asterisk or bullet signs. *****
+
+func TestForm_PasswordFieldIsDisplayedMasked(t *testing.T) {
+	t.SkipNow()
+
+	var form login.Form
+	form.Password = "secret"
+	ui := newTestingUI()
+
+	form.Render(ui)
+
+	// this does not work, RayGui cannot do this because we need to change the rendering.
+	// need to create your own function to use Password function. Will never see "*", only in screen shot.
+	if ui.textBoxText["password"] != "*****" {
+		t.Errorf("not masked")
+	}
+	// ImGui can do it with ImGuiInputTextFlags_Password = 1 << 15 ... Password mode, display all characters as '*'
+}
+
 // ***** The label "Password" is next to the input field. *****
+
+// skip tests, similar to 1st label
+
 // ***** There is a label in a red box above the button(s). It is only visible if there is an error. *****
