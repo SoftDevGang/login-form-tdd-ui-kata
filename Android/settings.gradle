@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Login Form'
+rootProject.name='Login Form Android'
