@@ -6,22 +6,22 @@ import (
 )
 
 type FormUI interface {
-	Button(bounds rl.Rectangle, text string) bool
-	TextBox(bounds rl.Rectangle, text string) string
-	Label(bounds rl.Rectangle, text string)
+	Button(id string, bounds rl.Rectangle, text string) bool
+	TextBox(id string, bounds rl.Rectangle, text string) string
+	Label(id string, bounds rl.Rectangle, text string)
 }
 
 type RaylibFormUI struct{}
 
-func (ui *RaylibFormUI) Button(bounds rl.Rectangle, text string) bool {
+func (ui *RaylibFormUI) Button(id string, bounds rl.Rectangle, text string) bool {
 	return raygui.Button(rl.Rectangle{}, text)
 }
 
-func (ui *RaylibFormUI) TextBox(bounds rl.Rectangle, text string) string {
+func (ui *RaylibFormUI) TextBox(id string, bounds rl.Rectangle, text string) string {
 	return raygui.TextBox(bounds, text)
 }
 
-func (ui *RaylibFormUI) Label(bounds rl.Rectangle, text string) {
+func (ui *RaylibFormUI) Label(id string, bounds rl.Rectangle, text string) {
 	raygui.Label(bounds, text)
 }
 
@@ -33,8 +33,8 @@ type Form struct {
 }
 
 func (form *Form) Render(ui FormUI) {
-	ui.Label(rl.Rectangle{}, "Phone, email or username")
-	form.UserName = ui.TextBox(rl.Rectangle{
+	ui.Label("username", rl.Rectangle{}, "Phone, email or username")
+	form.UserName = ui.TextBox("username", rl.Rectangle{
 		X:      0,
 		Y:      40,
 		Width:  100,
@@ -43,5 +43,5 @@ func (form *Form) Render(ui FormUI) {
 	if len(form.UserName) > UserNameLimit {
 		form.UserName = form.UserName[:UserNameLimit]
 	}
-	ui.Button(rl.Rectangle{235, 165, 345, 195}, "Log in")
+	ui.Button("login", rl.Rectangle{235, 165, 345, 195}, "Log in")
 }
