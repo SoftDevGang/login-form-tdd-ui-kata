@@ -35,7 +35,9 @@ type Form struct {
 	UserName string // Go style export more than we usually do.
 	Password string
 
-	Authenticator Authenticator
+	Busy                  bool
+	Authenticator         Authenticator
+	authenticationChannel chan error
 }
 
 // MVx: This is the controller or presenter.
@@ -62,8 +64,20 @@ func (form *Form) Render(ui FormUI) {
 
 	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
 	if ui.Button("login", buttonBounds, "Log in") {
+		form.Busy = true
+		form.authenticationChannel = make(chan error)
+
 		go func() {
-			_ = form.Authenticator.Authenticate(form.UserName, form.Password)
+			result := form.Authenticator.Authenticate(form.UserName, form.Password)
+			form.authenticationChannel <- result
 		}()
+	}
+	if form.Busy {
+		select {
+		case <-form.authenticationChannel:
+			// form.authenticationResult = result
+			form.Busy = false
+		default:
+		}
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 
@@ -65,7 +66,10 @@ func newTestingUI() *testingUI {
 func (ui *testingUI) TextBox(id string, bounds rl.Rectangle, text string) string {
 	ui.textBoxCalled[id] = true
 	ui.textBoxText[id] = text
+	// If no input is registered by the test, return the passed value. This assumes that the user did not
+	// change the value.
 	if input, hasInput := ui.textBoxUserInput[id]; hasInput {
+		delete(ui.textBoxUserInput, id) // reset value after reporting input
 		return input
 	}
 	return text
@@ -78,7 +82,9 @@ func (ui *testingUI) Button(id string, bounds rl.Rectangle, text string) bool {
 	ui.buttonCalled[id] = true
 	ui.buttonText[id] = text
 	ui.buttonBounds[id] = bounds
-	return ui.buttonResults[id]
+	result := ui.buttonResults[id]
+	ui.buttonResults[id] = false // reset button click after report
+	return result
 }
 
 // ***** There is a "Log in" button in right corner of the dialog. *****
@@ -267,12 +273,6 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	ui.buttonResults["login"] = true
 	form.Render(ui)
 
-	/*
-		if !form.Busy {
-			t.Errorf("not busy")
-		}
-	*/
-
 	authenticator.started.Wait()
 	if !authenticator.called {
 		t.Errorf("authenticator not called")
@@ -283,8 +283,44 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	if authenticator.pass != password {
 		t.Errorf("wrong password passed")
 	}
+	authenticator.completed.Done()
+}
+func TestForm_IsBusyWhileAuthenticating(t *testing.T) {
+	username, password := "user1", "secret2"
+	var form login.Form
+	authenticator := newTestingAuthenticator()
+	form.Authenticator = authenticator
+	ui := newTestingUI()
+
+	form.UserName = username
+	form.Password = password
+	ui.buttonResults["login"] = true
+	form.Render(ui)
+
+	if !form.Busy {
+		t.Errorf("not busy at start")
+	}
+
+	authenticator.started.Wait()
+
+	form.Render(ui)
+	if !form.Busy {
+		t.Errorf("not busy during authentication")
+	}
 
 	authenticator.completed.Done()
+
+	endTime := time.Now().Add(time.Second * 3)
+	for form.Busy {
+		form.Render(ui)
+		now := time.Now()
+		if now.After(endTime) {
+			break
+		}
+	}
+	if form.Busy {
+		t.Errorf("busy when finished")
+	}
 }
 
 /*
