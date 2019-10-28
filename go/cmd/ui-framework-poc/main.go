@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/gen2brain/raylib-go/raygui"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -17,6 +18,15 @@ func main() {
 		rl.ClearBackground(rl.RayWhite)
 
 		rl.DrawText(fmt.Sprintf("Congrats! You created your first window!"), 190, 200, 20, rl.LightGray)
+
+		if raygui.Button(rl.Rectangle{
+			X:      0,
+			Y:      0,
+			Width:  100,
+			Height: 20,
+		}, "something") {
+			fmt.Printf("yay!\n")
+		}
 
 		rl.EndDrawing()
 	}
