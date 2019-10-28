@@ -1,6 +1,8 @@
-## [Go](www.golang.org) variant
+## Setup [Go](https://www.golang.org)/raylib
 
-TDD on an [immediate mode GUI](https://en.wikipedia.org/wiki/Immediate_Mode_GUI) framework.
+Setup to TDD an [immediate mode GUI](https://en.wikipedia.org/wiki/Immediate_Mode_GUI) framework.
+
+This is a Go project. Run `go test ./...` to run your tests.
 
 ### Setup
 
