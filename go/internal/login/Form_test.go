@@ -26,6 +26,9 @@ func (ui *testingUI) TextBox(bounds rl.Rectangle, text string) string {
 	return ui.textBoxUserInput
 }
 
+func (ui *testingUI) Label(bounds rl.Rectangle, text string) {
+}
+
 func (ui *testingUI) Button(bounds rl.Rectangle, text string) bool {
 	ui.buttonCalled = true
 	ui.buttonText = text
@@ -33,7 +36,7 @@ func (ui *testingUI) Button(bounds rl.Rectangle, text string) bool {
 	return false
 }
 
-// * There is a "Log in" button in right corner of the dialog.
+// ***** There is a "Log in" button in right corner of the dialog. *****
 // right corner is design.
 
 func TestForm_LoginButton(t *testing.T) {
@@ -81,7 +84,7 @@ func TestForm_LoginButtonBounds(t *testing.T) {
 	// to assert the button, color, text etc. We would only test that button triggers.
 }
 
-// * There is a user name field, which is limited to 20 characters.
+// ***** There is a user name field, which is limited to 20 characters. *****
 
 func TestForm_UserNameField(t *testing.T) {
 	var form login.Form
@@ -142,8 +145,22 @@ func TestForm_UserNameFieldInputLimited(t *testing.T) {
 	}
 }
 
-// * The label "Phone, email or username" is next to the input field.
-// * There is a password field, which is limited to 20 characters.
-// * The password is either visible as asterisk or bullet signs.
-// * The label "Password" is next to the input field.
-// * There is a label in a red box above the button(s). It is only visible if there is an error.
+// ***** The label "Phone, email or username" is next to the input field. *****
+
+// Do we need to test the label? It is only style?
+// Typical style = colours, positions, pixel perfect stuff.
+// Does it matter, we test everything which we can easily?
+// Screen shot does not say what is wrong. The message is the image diff. We need to show the diff.
+//   Christian likes images. Peter thinks it's heavy weight.
+
+// What about the label?
+// Peter would write a unit test.
+// Christian would do all presentation stuff with screen shot like a schema validation.
+// -> just write the code.
+
+// btw. the test UI does not force any design.
+
+// ***** There is a password field, which is limited to 20 characters. *****
+// ***** The password is either visible as asterisk or bullet signs. *****
+// ***** The label "Password" is next to the input field. *****
+// ***** There is a label in a red box above the button(s). It is only visible if there is an error. *****
