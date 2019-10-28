@@ -2,6 +2,7 @@ package login_test
 
 import (
 	"strings"
+	"sync"
 	"testing"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -14,13 +15,25 @@ type testingAuthenticator struct {
 	user   string
 	pass   string
 
-	err error
+	started   sync.WaitGroup
+	completed sync.WaitGroup
+	err       error
+}
+
+func newTestingAuthenticator() *testingAuthenticator {
+	a := &testingAuthenticator{}
+	a.started.Add(1)
+	a.completed.Add(1)
+	return a
 }
 
 func (a *testingAuthenticator) Authenticate(user, pass string) error {
 	a.called = true
 	a.user = user
 	a.pass = pass
+	a.started.Done()
+
+	a.completed.Wait()
 	return a.err
 }
 
@@ -243,17 +256,24 @@ func TestForm_PasswordFieldIsDisplayedMasked(t *testing.T) {
 // ***** User name and password given, button "Log in" clicked, backend reports success, dialog is closed. *****
 
 func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
+	username, password := "user1", "secret2"
 	var form login.Form
-	var authenticator testingAuthenticator
-	form.Authenticator = &authenticator
+	authenticator := newTestingAuthenticator()
+	form.Authenticator = authenticator
 	ui := newTestingUI()
 
-	ui.buttonResults["login"] = true
-	username, password := "user1", "secret2"
 	form.UserName = username
 	form.Password = password
+	ui.buttonResults["login"] = true
 	form.Render(ui)
 
+	/*
+		if !form.Busy {
+			t.Errorf("not busy")
+		}
+	*/
+
+	authenticator.started.Wait()
 	if !authenticator.called {
 		t.Errorf("authenticator not called")
 	}
@@ -263,6 +283,17 @@ func TestForm_CallsAuthenticatorWhenLoginButtonUsed(t *testing.T) {
 	if authenticator.pass != password {
 		t.Errorf("wrong password passed")
 	}
+
+	authenticator.completed.Done()
 }
+
+/*
+form.Render(ui) // -> renders form disabled (no button, whatever ...)
+
+authenticator.completed.Done()
+
+form.Render(ui) // -> should return true
+}
+*/
 
 // ***** User name and password given, button "Log in" clicked, backend reports no success, show message in error line. *****

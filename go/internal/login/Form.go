@@ -62,6 +62,8 @@ func (form *Form) Render(ui FormUI) {
 
 	buttonBounds := rl.Rectangle{X: 235, Y: 165, Width: 345, Height: 195}
 	if ui.Button("login", buttonBounds, "Log in") {
-		_ = form.Authenticator.Authenticate(form.UserName, form.Password)
+		go func() {
+			_ = form.Authenticator.Authenticate(form.UserName, form.Password)
+		}()
 	}
 }
