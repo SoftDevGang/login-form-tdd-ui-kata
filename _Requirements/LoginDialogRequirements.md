@@ -16,7 +16,7 @@ Depending on the used technology, assume an `Authentication` service, facade or 
 * The password is either visible as asterisk or bullet signs.
 * The label "Password" is left, next to the input field.
 * There is a label in a red box above the button(s). It is only visible if there was an error.
-* There is a "Log in" button in right corner of the window.
+* There is a "Log in" button in the bottom right corner of the window.
 
 #### Logic
 
@@ -24,7 +24,7 @@ The logic uses the `Authentication` backend described above. Calls to the backen
 
 * User name and password given, button "Log in" clicked, backend reports success, then the form is closed.
 * User name and password given, button "Log in" clicked, backend reports an error, show message in error line, form stays open.
-* When "Log in" is clicked, while the backend is working, the button stays disabled.
+* While the backend is working, the "Log in" button stays disabled.
 
 ![sketch of the bare login](./SketchBare.png)
 
