@@ -24,12 +24,14 @@ public class LoginPresenter {
     }
 
     public void loginButtonClicked() {
-        AuthenticationResult result = authenticationService.authenticate(model.getLookup(), model.getPassword());
-        if (result.success) {
-            view.close();
-        } else {
-            view.showError(result.message);
-        }
+        new Thread(() -> {
+            AuthenticationResult result = authenticationService.authenticate(model.getLookup(), model.getPassword());
+            if (result.success) {
+                view.close();
+            } else {
+                view.showError(result.message);
+            }
+        }).start();
     }
 
 }
