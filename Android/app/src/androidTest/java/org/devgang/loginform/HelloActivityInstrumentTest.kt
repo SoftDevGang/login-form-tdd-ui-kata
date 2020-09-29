@@ -15,11 +15,11 @@ import org.junit.runner.RunWith
 @LargeTest
 class HelloActivityInstrumentTest {
 
-    @get:Rule
-    var activityScenarioRule = activityScenarioRule<HelloActivity>()
-
-    @Test
-    fun hello_activity_has_some_hello_text() {
-        onView(withId(R.id.text_hello)).check(matches(withText("Hello!")))
-    }
+//    @get:Rule
+//    var activityScenarioRule = activityScenarioRule<HelloActivity>()
+//
+//    @Test
+//    fun hello_activity_has_some_hello_text() {
+//        onView(withId(R.id.text_hello)).check(matches(withText("Hello!")))
+//    }
 }
