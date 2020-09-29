@@ -13,16 +13,32 @@ class NewsReaderOverviewTest {
     @Test
     fun should_set_no_results_for_no_news_items() {
         val overviewUi = DummyOverviewUi()
-        val newsModel = NewsModel()
+        val newsModel = NewsModel(arrayOf())
         val presenter = NewsReaderOverviewPresenter(overviewUi, newsModel)
         presenter.onLoad()
         assertTrue(overviewUi.noResultsFoundCalled)
+    }
+
+    @Test
+    fun should_display_single_news_item() {
+        val overviewUi = DummyOverviewUi()
+        val item = NewsItem("dummyNewsItemTitle")
+        val newsModel = NewsModel(arrayOf(item))
+        val presenter = NewsReaderOverviewPresenter(overviewUi, newsModel)
+        presenter.onLoad()
+        assertEquals(overviewUi.setItems.size, 1)
     }
 }
 
 class DummyOverviewUi : OverviewUi {
     var noResultsFoundCalled = false
+    var setItems: List<OverviewItemViewModel> = emptyList()
     override fun displayNoResultsFound() {
         noResultsFoundCalled = true
+    }
+
+    override fun setViewModel(items: List<OverviewItemViewModel>) {
+        setItems = items
+
     }
 }

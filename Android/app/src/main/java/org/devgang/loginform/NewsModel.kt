@@ -1,6 +1,4 @@
 package org.devgang.loginform
 
-class NewsModel {
-
-    val items: List<Any> = emptyList()
+class NewsModel(val items: Array<NewsItem>) {
 }
