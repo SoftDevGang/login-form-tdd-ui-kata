@@ -1,8 +1,10 @@
 package org.devgang.loginform
 
-class NewsReaderOverviewPresenter(var overviewUi: OverviewUi) {
+class NewsReaderOverviewPresenter(var overviewUi: OverviewUi, var newsModel: NewsModel) {
     fun onLoad() {
-        overviewUi.displayNoResultsFound()
+        if(newsModel.items.isEmpty()) {
+            overviewUi.displayNoResultsFound()
+        }
     }
 
 }

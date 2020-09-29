@@ -13,7 +13,8 @@ class NewsReaderOverviewTest {
     @Test
     fun should_set_no_results_for_no_news_items() {
         val overviewUi = DummyOverviewUi()
-        val presenter = NewsReaderOverviewPresenter(overviewUi)
+        val newsModel = NewsModel()
+        val presenter = NewsReaderOverviewPresenter(overviewUi, newsModel)
         presenter.onLoad()
         assertTrue(overviewUi.noResultsFoundCalled)
     }
