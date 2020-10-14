@@ -8,7 +8,6 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_overview)
-
         findViewById<TextView>(R.id.newsPageHeadline).text = "Today's News!"
     }
 
