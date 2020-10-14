@@ -23,7 +23,7 @@ class NewsAdapterTest {
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var newsItem = emptyArray<NewsItem>()
+    var newsModel = NewsModel(emptyArray())
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         TODO()
     }
@@ -33,11 +33,11 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return newsItem.size
+        return newsModel.items.size
     }
 
     fun setData(newsModel: NewsModel) {
-        newsItem = newsModel.items
+        this.newsModel = newsModel
     }
 
 }
