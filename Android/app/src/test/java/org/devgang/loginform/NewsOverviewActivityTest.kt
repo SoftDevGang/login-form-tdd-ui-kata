@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +36,7 @@ class NewsOverviewActivityTest {
         onView(withId(R.id.newsPageHeadline)).check(matches(withText("Today's News!")))
     }
 
-    @Test
+    @Test @Ignore
     fun should_display_nothing_found() {
         val newsOverviewActivity = getActivity() as NewsOverviewActivity
         newsOverviewActivity.displayNoResultsFound()

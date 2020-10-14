@@ -9,7 +9,8 @@ class NewsReaderOverviewPresenterTest {
     fun should_set_no_results_for_no_news_items() {
         val overviewUi = DummyOverviewUi()
         val newsModel = NewsModel(arrayOf())
-        val presenter = NewsReaderOverviewPresenter(overviewUi, newsModel)
+        val dummyNewsDownloader = NewsDownloaderStub(newsModel)
+        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader)
         presenter.onLoad()
         assertTrue(overviewUi.noResultsFoundCalled)
     }
@@ -19,9 +20,17 @@ class NewsReaderOverviewPresenterTest {
         val overviewUi = DummyOverviewUi()
         val item = NewsItem("dummyNewsItemTitle")
         val newsModel = NewsModel(arrayOf(item))
-        val presenter = NewsReaderOverviewPresenter(overviewUi, newsModel)
+        val dummyNewsDownloader = NewsDownloaderStub(newsModel)
+        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader)
         presenter.onLoad()
         assertEquals(overviewUi.setItems.size, 1)
+    }
+}
+
+class NewsDownloaderStub(var newsModel: NewsModel) : NewsDownload {
+
+    override fun downloadNews(): NewsModel {
+        return newsModel
     }
 }
 
