@@ -1,7 +1,5 @@
 package org.devgang.loginform
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
 import org.junit.Test
@@ -31,26 +29,4 @@ class NewsAdapterTest {
 //        newsAdapter.bindViewHolder(viewHolder,0)
 //        Assert.assertEquals(0, itemCount)
 //    }
-}
-
-class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    var newsModel = NewsModel(emptyArray())
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if(newsModel.items.isEmpty())
-        TODO()
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO()
-    }
-
-    override fun getItemCount(): Int {
-        return newsModel.items.size
-    }
-
-    fun setData(newsModel: NewsModel) {
-        this.newsModel = newsModel
-    }
-
 }
