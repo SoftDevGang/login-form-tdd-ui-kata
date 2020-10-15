@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class HelloActivityInstrumentTest {
+class SampleActivityInstrumentTest {
 
 //    @get:Rule
 //    var activityScenarioRule = activityScenarioRule<HelloActivity>()
