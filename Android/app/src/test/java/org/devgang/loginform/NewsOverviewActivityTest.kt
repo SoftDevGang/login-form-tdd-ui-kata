@@ -36,7 +36,8 @@ class NewsOverviewActivityTest {
         onView(withId(R.id.newsPageHeadline)).check(matches(withText("Today's News!")))
     }
 
-    @Test @Ignore
+    @Test
+    @Ignore("work on adapter before we can use it here")
     fun should_display_nothing_found() {
         val newsOverviewActivity = getActivity() as NewsOverviewActivity
         newsOverviewActivity.displayNoResultsFound()

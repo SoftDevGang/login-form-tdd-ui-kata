@@ -1,6 +1,6 @@
 package org.devgang.loginform
 
-class NewsReaderOverviewPresenter(var overviewUi: OverviewUi, var newsDownload: NewsDownload) {
+class NewsReaderOverviewPresenter(private var overviewUi: OverviewUi, private var newsDownload: NewsDownload) {
     fun onLoad() {
         val newsModel = newsDownload.downloadNews()
         if (newsModel.items.isEmpty()) {
@@ -10,5 +10,4 @@ class NewsReaderOverviewPresenter(var overviewUi: OverviewUi, var newsDownload: 
             overviewUi.setViewModel(items)
         }
     }
-
 }

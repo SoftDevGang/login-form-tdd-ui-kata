@@ -1,5 +1,4 @@
 package org.devgang.loginform
 
-class OverviewItemViewModel(title: Any?) {
-
+class OverviewItemViewModel(val title: String) {
 }
