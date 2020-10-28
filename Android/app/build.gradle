@@ -51,6 +51,8 @@ dependencies {
     testImplementation "androidx.test.ext:junit-ktx:$extJUnitVersion"
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation 'org.mockito:mockito-core:2.23.0'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
     // Instrumentation test dependencies
     androidTestImplementation "androidx.test:core:$testCoreVersion"
