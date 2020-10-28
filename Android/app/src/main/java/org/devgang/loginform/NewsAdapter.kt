@@ -1,5 +1,6 @@
 package org.devgang.loginform
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,12 +19,11 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if(newsModel.items.isEmpty())
-        TODO()
+      return NoNewsViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_nonews, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO()
+
     }
 
     override fun getItemCount(): Int {
