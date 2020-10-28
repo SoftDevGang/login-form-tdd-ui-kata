@@ -1,4 +1,4 @@
-package org.devgang.loginform
+package org.devgang.loginform.view
 
 interface OverviewUi {
     fun displayNoResultsFound()

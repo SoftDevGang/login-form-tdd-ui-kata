@@ -1,14 +1,22 @@
-package org.devgang.loginform
+package org.devgang.loginform.viewimpl
 
+import android.content.Context
+import android.widget.LinearLayout
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.devgang.loginform.model.NewsItem
+import org.devgang.loginform.model.NewsModel
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
 class NewsAdapterTest {
 
     private val newsAdapter: NewsAdapter = NewsAdapter()
+
+    // --- test method of adapter not depending on UI code
 
     @Test
     fun should_count_1_for_empty_model() {
@@ -50,17 +58,16 @@ class NewsAdapterTest {
 
     private fun createEmptyNewsModel() = NewsModel(arrayOf())
 
-    /*
-     * Can't simulate Context
-     */
-//    @Test
-//    fun should_return_empty_view_holder_for_empty_model() {
-//        val newsModel = createEmptyNewsModel()
-//        newsAdapter.setData(newsModel)
-//
-//        val context = object :Context(){}
-//
-//        val viewHolder = newsAdapter.onCreateViewHolder(LinearLayout(context), NewsAdapter.VIEW_TYPE_NO_NEWS)
-//        Assert.assertTrue(viewHolder is NoNewsViewHolder)
-//    }
+    @Test
+    @Ignore("Can't simulate Context, too complicated :-(")
+    fun should_return_empty_view_holder_for_empty_model() {
+        val newsModel = createEmptyNewsModel()
+        newsAdapter.setData(newsModel)
+
+        // val context = object :Context(){}
+        val context = mock(Context::class.java)
+
+        val viewHolder = newsAdapter.onCreateViewHolder(LinearLayout(context), NewsAdapter.VIEW_TYPE_NO_NEWS)
+        Assert.assertTrue(viewHolder is NoNewsViewHolder)
+    }
 }

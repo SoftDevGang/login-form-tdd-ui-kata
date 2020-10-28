@@ -1,10 +1,17 @@
 package org.devgang.loginform
 
+import org.devgang.loginform.model.NewsDownloaderStub
+import org.devgang.loginform.model.NewsItem
+import org.devgang.loginform.model.NewsModel
+import org.devgang.loginform.view.OverviewUiMock
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-import org.junit.Assert.*
-
 class NewsReaderOverviewPresenterTest {
+
+    // --- test interaction from presenter -> view
+
     @Test
     fun should_set_no_results_for_no_news_items() {
         val overviewUi = OverviewUiMock()
@@ -25,4 +32,6 @@ class NewsReaderOverviewPresenterTest {
         presenter.onLoad()
         assertEquals(overviewUi.setItems.size, 1)
     }
+
+    // TODO next test cases for presenter: click on displayed element comes back to presenter
 }

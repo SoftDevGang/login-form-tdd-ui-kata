@@ -1,10 +1,13 @@
-package org.devgang.loginform
+package org.devgang.loginform.viewimpl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.devgang.loginform.R
+import org.devgang.loginform.view.OverviewItemViewModel
+import org.devgang.loginform.view.OverviewUi
 
 class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 

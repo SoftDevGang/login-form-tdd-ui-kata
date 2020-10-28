@@ -1,10 +1,14 @@
-package org.devgang.loginform
+package org.devgang.loginform.viewimpl
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.devgang.loginform.R
+import org.devgang.loginform.model.NewsModel
 
-
+/**
+ * internal class to the UI = View.
+ */
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -15,11 +19,13 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var newsModel = NewsModel(emptyArray())
 
     override fun getItemViewType(position: Int): Int {
-        return if(isEmpty()) VIEW_TYPE_NO_NEWS else VIEW_TYPE_NEWS
+        return if (isEmpty()) VIEW_TYPE_NO_NEWS else VIEW_TYPE_NEWS
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-      return NoNewsViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_nonews, parent, false))
+        return NoNewsViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.viewholder_nonews, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

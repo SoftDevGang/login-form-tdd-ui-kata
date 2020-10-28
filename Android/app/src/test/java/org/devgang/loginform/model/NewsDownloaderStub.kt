@@ -1,4 +1,4 @@
-package org.devgang.loginform
+package org.devgang.loginform.model
 
 class NewsDownloaderStub(var newsModel: NewsModel) : NewsDownload {
 
