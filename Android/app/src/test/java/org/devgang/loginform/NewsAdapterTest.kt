@@ -38,6 +38,15 @@ class NewsAdapterTest {
         Assert.assertEquals(NewsAdapter.VIEW_TYPE_NO_NEWS, viewType)
     }
 
+    @Test
+    fun should_return_view_type_news_for_filled_model() {
+        val newsModel = createFilledNewsModel()
+        newsAdapter.setData(newsModel)
+
+        val viewType = newsAdapter.getItemViewType(0)
+        Assert.assertEquals(NewsAdapter.VIEW_TYPE_NEWS, viewType)
+    }
+
     private fun createFilledNewsModel() = NewsModel(arrayOf(NewsItem("news1"), NewsItem("news2")))
 
     private fun createEmptyNewsModel() = NewsModel(arrayOf())
