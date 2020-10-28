@@ -18,6 +18,16 @@ class NewsAdapterTest {
         Assert.assertEquals(1, itemCount)
     }
 
+    @Test
+    fun should_count_items_in_model() {
+        val newsModel = NewsModel(arrayOf(NewsItem("news1"), NewsItem("news2")))
+        val newsAdapter = NewsAdapter()
+        newsAdapter.setData(newsModel)
+
+        val itemCount = newsAdapter.itemCount
+        Assert.assertEquals(2, itemCount)
+    }
+
 //    @Test
 //    fun should_return_empty_view_holder_for_empty_model() {
 //        val newsModel = NewsModel(arrayOf())
