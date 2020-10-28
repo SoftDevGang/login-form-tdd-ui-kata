@@ -9,13 +9,13 @@ import org.junit.runner.RunWith
 class NewsAdapterTest {
 
     @Test
-    fun should_count_0_for_empty_model() {
+    fun should_count_1_for_empty_model() {
         val newsModel = NewsModel(arrayOf())
         val newsAdapter = NewsAdapter()
         newsAdapter.setData(newsModel)
 
         val itemCount = newsAdapter.itemCount
-        Assert.assertEquals(0, itemCount)
+        Assert.assertEquals(1, itemCount)
     }
 
 //    @Test

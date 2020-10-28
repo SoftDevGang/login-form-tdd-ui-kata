@@ -17,7 +17,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return newsModel.items.size
+        return if (newsModel.items.isEmpty()) 1 else newsModel.items.size
     }
 
     fun setData(newsModel: NewsModel) {
