@@ -2,16 +2,18 @@ package org.devgang.loginform
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class NewsAdapterTest {
 
+    private val newsAdapter: NewsAdapter = NewsAdapter()
+
     @Test
     fun should_count_1_for_empty_model() {
-        val newsModel = NewsModel(arrayOf())
-        val newsAdapter = NewsAdapter()
+        val newsModel = createEmptyNewsModel()
         newsAdapter.setData(newsModel)
 
         val itemCount = newsAdapter.itemCount
@@ -20,8 +22,7 @@ class NewsAdapterTest {
 
     @Test
     fun should_count_items_in_model() {
-        val newsModel = NewsModel(arrayOf(NewsItem("news1"), NewsItem("news2")))
-        val newsAdapter = NewsAdapter()
+        val newsModel = createFilledNewsModel()
         newsAdapter.setData(newsModel)
 
         val itemCount = newsAdapter.itemCount
@@ -30,13 +31,16 @@ class NewsAdapterTest {
 
     @Test
     fun should_return_view_type_no_news_for_empty_model() {
-        val newsModel = NewsModel(arrayOf())
-        val newsAdapter = NewsAdapter()
+        val newsModel = createEmptyNewsModel()
         newsAdapter.setData(newsModel)
 
         val viewType = newsAdapter.getItemViewType(0)
         Assert.assertEquals(NewsAdapter.VIEW_TYPE_NO_NEWS, viewType)
     }
+
+    private fun createFilledNewsModel() = NewsModel(arrayOf(NewsItem("news1"), NewsItem("news2")))
+
+    private fun createEmptyNewsModel() = NewsModel(arrayOf())
 
 
 //    @Test
