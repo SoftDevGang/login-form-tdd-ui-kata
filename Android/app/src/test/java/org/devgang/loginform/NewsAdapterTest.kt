@@ -2,7 +2,6 @@ package org.devgang.loginform
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -51,16 +50,17 @@ class NewsAdapterTest {
 
     private fun createEmptyNewsModel() = NewsModel(arrayOf())
 
-
+    /*
+     * Can't simulate Context
+     */
 //    @Test
 //    fun should_return_empty_view_holder_for_empty_model() {
-//        val newsModel = NewsModel(arrayOf())
-//        val newsAdapter = NewsAdapter()
+//        val newsModel = createEmptyNewsModel()
 //        newsAdapter.setData(newsModel)
 //
-//        val viewHolder = newsAdapter.onCreateViewHolder()
-//        viewHolder.itemViewType
-//        newsAdapter.bindViewHolder(viewHolder,0)
-//        Assert.assertEquals(0, itemCount)
+//        val context = object :Context(){}
+//
+//        val viewHolder = newsAdapter.onCreateViewHolder(LinearLayout(context), NewsAdapter.VIEW_TYPE_NO_NEWS)
+//        Assert.assertTrue(viewHolder is NoNewsViewHolder)
 //    }
 }
