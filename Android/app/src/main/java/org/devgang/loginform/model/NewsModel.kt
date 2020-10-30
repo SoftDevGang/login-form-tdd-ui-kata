@@ -1,4 +1,3 @@
 package org.devgang.loginform.model
 
-class NewsModel(val items: Array<NewsItem>) {
-}
+class NewsModel(val items: Array<NewsItem>)
