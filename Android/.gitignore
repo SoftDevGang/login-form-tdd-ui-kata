@@ -13,3 +13,6 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Windows Links
+*.lnk
