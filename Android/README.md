@@ -28,9 +28,9 @@ Specific frameworks for testing Android UIs provided are [Espresso](https://deve
 5. Then work on real UI/view impl `NewsOverviewActivity`.
 
    - Begin with showing the header message. (DONE)
-   - Should display nothing found. (WIP)
+   - Should display nothing found. (DONE)
    - Should handle and display found news.
 
 6. Needed UI infrastructure `NewsAdapterTest` which we started as unit test.
 
-7. Then download, click of item, etc.
+7. Continue with download or click of item, etc.
