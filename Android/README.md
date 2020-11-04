@@ -1,7 +1,7 @@
 # News Reader - Kotlin/Android
 
 Done in a Randori-styled [Coding Dojo](http://codingdojo.org/WhatIsCodingDojo/), 
-3 sessions a 2 hours.
+4 sessions a 2 hours.
 
 ## Setup
 
@@ -29,8 +29,14 @@ Specific frameworks for testing Android UIs provided are [Espresso](https://deve
 
    - Begin with showing the header message. (DONE)
    - Should display nothing found. (DONE)
-   - Should handle and display found news.
+   - Should handle and display found news. (DONE)
+   - Challenge: UI testing
 
 6. Needed UI infrastructure `NewsAdapterTest` which we started as unit test.
 
-7. Continue with download or click of item, etc.
+7. Backend Model download data.
+
+   - change download API to RX
+   - Challenge: Async testing
+
+8. Continue UI with click of item, etc.
