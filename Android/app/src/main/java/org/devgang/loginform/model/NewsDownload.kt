@@ -1,5 +1,7 @@
 package org.devgang.loginform.model
 
+import io.reactivex.Observable
+
 interface NewsDownload {
-    fun downloadNews(): NewsModel
+    fun downloadNews(): Observable<NewsModel>
 }
