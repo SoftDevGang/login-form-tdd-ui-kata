@@ -62,7 +62,7 @@ class NewsOverviewActivityTest {
         newsOverviewActivity.setViewModel(items)
 
         onView(withId(R.id.newsContainer)).check(matches(atPosition(0, hasDescendant(withText("First News")))))
-//        onView(withId(R.id.newsContainer)).check(matches(atPosition(1, hasDescendant(withText("Second News")))))
+        onView(withId(R.id.newsContainer)).check(matches(atPosition(1, hasDescendant(withText("Second News")))))
     }
 
     // see https://stackoverflow.com/a/34795431/104143
