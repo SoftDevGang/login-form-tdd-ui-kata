@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.BoundedMatcher
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.devgang.loginform.R
+import org.devgang.loginform.view.OverviewItemViewModel
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.junit.Rule
@@ -51,6 +51,18 @@ class NewsOverviewActivityTest {
 
         onView(withId(R.id.newsContainer)).check(matches(atPosition(0, withText("No news"))))
         // onView(withId(R.id.newsContainer)).check(matches(atPosition(0, hasDescendant(withText("No news")))))
+    }
+
+    @Test
+    fun should_display_two_news() {
+        val newsOverviewActivity = getActivity() as NewsOverviewActivity
+
+        val items =
+            listOf(OverviewItemViewModel("First News"), OverviewItemViewModel("Second News"))
+        newsOverviewActivity.setViewModel(items)
+
+        onView(withId(R.id.newsContainer)).check(matches(atPosition(0, hasDescendant(withText("First News")))))
+//        onView(withId(R.id.newsContainer)).check(matches(atPosition(1, hasDescendant(withText("Second News")))))
     }
 
     // see https://stackoverflow.com/a/34795431/104143

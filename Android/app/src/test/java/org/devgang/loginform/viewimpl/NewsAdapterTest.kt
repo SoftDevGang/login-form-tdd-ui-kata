@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
+import org.devgang.loginform.view.OverviewItemViewModel
 import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Test
@@ -54,9 +55,9 @@ class NewsAdapterTest {
         Assert.assertEquals(NewsAdapter.VIEW_TYPE_NEWS, viewType)
     }
 
-    private fun createFilledNewsModel() = NewsModel(arrayOf(NewsItem("news1"), NewsItem("news2")))
+    private fun createFilledNewsModel() = listOf(OverviewItemViewModel("news1"), OverviewItemViewModel("news2"))
 
-    private fun createEmptyNewsModel() = NewsModel(arrayOf())
+    private fun createEmptyNewsModel() = emptyList<OverviewItemViewModel>()
 
     @Test
     @Ignore("Can't simulate Context, too complicated :-(")

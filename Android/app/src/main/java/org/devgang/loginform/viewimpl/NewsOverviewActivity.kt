@@ -11,6 +11,8 @@ import org.devgang.loginform.view.OverviewUi
 
 class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 
+    private val newsAdapter = NewsAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_overview)
@@ -18,12 +20,13 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 
         val newsListView = findViewById<RecyclerView>(R.id.newsContainer)
         newsListView.layoutManager = LinearLayoutManager(this)
-        newsListView.adapter = NewsAdapter()
+        newsListView.adapter = newsAdapter
     }
 
     override fun displayNoResultsFound() {
     }
 
     override fun setViewModel(items: List<OverviewItemViewModel>) {
+        newsAdapter.setData(items)
     }
 }
