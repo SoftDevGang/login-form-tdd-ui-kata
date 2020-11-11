@@ -3,8 +3,6 @@ package org.devgang.loginform.network
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.apache.tools.ant.taskdefs.Sleep
-import org.devgang.loginform.network.NewsNetworkDownloader
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.net.HttpURLConnection
@@ -16,12 +14,11 @@ class NewsNetworkDownloaderTest {
     @Test
     fun should_download_no_news() {
         val mockServer = MockWebServer()
-        val mockResponse = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody("[]")
-        // mockServer.url("/results.json")
-        mockServer.enqueue(mockResponse)
         mockServer.start(8080)
+        mockServer.enqueue(MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody("[]"))
+        val testUrl = mockServer.url("/results.json")
 
-        //val newsNetworkDownloader = NewsNetworkDownloader("http://127.0.0.1:8080/", )
+        val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
 
         //TODO
@@ -31,6 +28,7 @@ class NewsNetworkDownloaderTest {
         // Close Observer & Close OK-HTTP-SERVER
         // https://stackoverflow.com/questions/26699147/how-to-use-testscheduler-in-rxjava
 
+       Thread.sleep(1000 * 60 * 60)
         mockServer.shutdown()
         assert(false)
     }
