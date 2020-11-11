@@ -20,7 +20,7 @@ class NewsReaderOverviewPresenter(
         val newsModelObservable = newsDownload.downloadNews()
         val subscribe = newsModelObservable
             .subscribeOn(schedulerToSubscribe)
-            .observeOn(schedulerToObserve) // TODO Inject Scheduling, test is blocking
+            .observeOn(schedulerToObserve)
             .subscribe { newsModel ->
                 if (newsModel.items.isEmpty()) {
                     overviewUi.displayNoResultsFound()
@@ -31,5 +31,10 @@ class NewsReaderOverviewPresenter(
             }
         compositeDisposable.add(subscribe)
     }
-    // TODO dispose disposables
+
+    fun dispose() {
+        if (!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
+    }
 }
