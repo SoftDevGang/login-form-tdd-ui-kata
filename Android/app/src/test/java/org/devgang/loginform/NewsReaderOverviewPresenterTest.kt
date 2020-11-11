@@ -1,5 +1,6 @@
 package org.devgang.loginform
 
+import io.reactivex.schedulers.Schedulers
 import org.devgang.loginform.model.NewsDownloaderStub
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
@@ -17,7 +18,7 @@ class NewsReaderOverviewPresenterTest {
         val overviewUi = OverviewUiMock()
         val newsModel = NewsModel(arrayOf())
         val dummyNewsDownloader = NewsDownloaderStub(newsModel)
-        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader)
+        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader, Schedulers.trampoline(), Schedulers.trampoline())
         presenter.onLoad()
         assertTrue(overviewUi.noResultsFoundCalled)
     }
@@ -28,7 +29,7 @@ class NewsReaderOverviewPresenterTest {
         val item = NewsItem("dummyNewsItemTitle")
         val newsModel = NewsModel(arrayOf(item))
         val dummyNewsDownloader = NewsDownloaderStub(newsModel)
-        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader)
+        val presenter = NewsReaderOverviewPresenter(overviewUi, dummyNewsDownloader, Schedulers.trampoline(), Schedulers.trampoline())
         presenter.onLoad()
         assertEquals(overviewUi.setItems.size, 1)
     }

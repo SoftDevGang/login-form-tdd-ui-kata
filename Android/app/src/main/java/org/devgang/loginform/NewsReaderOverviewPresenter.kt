@@ -9,25 +9,26 @@ import org.devgang.loginform.view.OverviewItemViewModel
 import org.devgang.loginform.view.OverviewUi
 
 class NewsReaderOverviewPresenter(
-    private var overviewUi: OverviewUi,
-    private var newsDownload: NewsDownload
+    private val overviewUi: OverviewUi,
+    private val newsDownload: NewsDownload,
+    private val schedulerToSubscribe: Scheduler = Schedulers.io(),
+    private val schedulerToObserve: Scheduler = AndroidSchedulers.mainThread()
 ) {
-
     private val compositeDisposable = CompositeDisposable()
 
     fun onLoad() {
         val newsModelObservable = newsDownload.downloadNews()
         val subscribe = newsModelObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()) // TODO Inject Scheduling, test is blocking
+            .subscribeOn(schedulerToSubscribe)
+            .observeOn(schedulerToObserve) // TODO Inject Scheduling, test is blocking
             .subscribe { newsModel ->
-            if (newsModel.items.isEmpty()) {
-                overviewUi.displayNoResultsFound()
-            } else {
-                val items = newsModel.items.map { OverviewItemViewModel(it.title) }
-                overviewUi.setViewModel(items)
+                if (newsModel.items.isEmpty()) {
+                    overviewUi.displayNoResultsFound()
+                } else {
+                    val items = newsModel.items.map { OverviewItemViewModel(it.title) }
+                    overviewUi.setViewModel(items)
+                }
             }
-        }
         compositeDisposable.add(subscribe)
     }
     // TODO dispose disposables
