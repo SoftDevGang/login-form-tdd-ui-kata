@@ -6,7 +6,9 @@ import org.devgang.loginform.model.NewsModel
 
 class NewsNetworkDownloader(url: String) : NewsDownload {
     override fun downloadNews(): Observable<NewsModel> {
-        TODO("Not yet implemented")
+        return Observable.create(){
+            it.onComplete()
+        }
     }
 
 }

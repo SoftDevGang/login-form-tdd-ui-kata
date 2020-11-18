@@ -1,8 +1,11 @@
 package org.devgang.loginform.network
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.reactivex.observers.TestObserver
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.devgang.loginform.model.NewsItem
+import org.devgang.loginform.model.NewsModel
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.net.HttpURLConnection
@@ -10,6 +13,7 @@ import java.net.HttpURLConnection
 @RunWith(AndroidJUnit4::class)
 class NewsNetworkDownloaderTest {
 
+//TODO: move server in before and after
 
     @Test
     fun should_download_no_news() {
@@ -20,16 +24,13 @@ class NewsNetworkDownloaderTest {
 
         val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
+        val testObserver = TestObserver<NewsModel>()
+        newsNetworkDownloader.downloadNews().subscribe(testObserver)
 
-        //TODO
-        // Downloader starten (HOST/PORT), Scheduler übergeben
-        // Warten auf Response
-        // Observe if empty
-        // Close Observer & Close OK-HTTP-SERVER
-        // https://stackoverflow.com/questions/26699147/how-to-use-testscheduler-in-rxjava
+        testObserver.awaitCount(1)
+        testObserver.assertValue(NewsModel(emptyArray()))
 
-       Thread.sleep(1000 * 60 * 60)
+        testObserver.dispose()
         mockServer.shutdown()
-        assert(false)
     }
 }
