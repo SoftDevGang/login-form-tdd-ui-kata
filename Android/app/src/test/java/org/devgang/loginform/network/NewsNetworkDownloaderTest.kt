@@ -33,4 +33,26 @@ class NewsNetworkDownloaderTest {
         testObserver.dispose()
         mockServer.shutdown()
     }
+
+    @Test
+    fun should_download_single_news() {
+        val mockServer = MockWebServer()
+        mockServer.start(8080)
+        mockServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody("[{\"title\":\"foo\"}]")
+        )
+        val testUrl = mockServer.url("/results.json")
+
+        val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
+
+        val testObserver = TestObserver<NewsModel>()
+        newsNetworkDownloader.downloadNews().subscribe(testObserver)
+
+        testObserver.awaitCount(1)
+        testObserver.assertValue(NewsModel(arrayOf(NewsItem("foo"))))
+
+        testObserver.dispose()
+        mockServer.shutdown()
+    }
 }

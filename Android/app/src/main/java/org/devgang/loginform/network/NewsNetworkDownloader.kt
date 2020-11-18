@@ -13,20 +13,26 @@ class NewsNetworkDownloader(val url: String) : NewsDownload {
     override fun downloadNews(): Observable<NewsModel> {
         return Observable.create {
 
-            val client = OkHttpClient()
-            val request = Request.Builder().url(url).addHeader("Content-Type", "application/json").build();
+            val newsModel = downloadNewsBlocking()
 
-            val response = client.newCall(request).execute()
-
-            val body = response.body?.string()
-
-            val gson = Gson()
-
-            val entity: Array<NewsItem> = gson.fromJson(body, Array<NewsItem>::class.java)
-
-            it.onNext(NewsModel(entity))
+            it.onNext(newsModel)
             it.onComplete()
         }
+    }
+
+    private fun downloadNewsBlocking(): NewsModel {
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).addHeader("Content-Type", "application/json").build();
+
+        val response = client.newCall(request).execute()
+
+        val body = response.body?.string()
+
+        val gson = Gson()
+
+        val entity: Array<NewsItem> = gson.fromJson(body, Array<NewsItem>::class.java)
+
+        return NewsModel(entity)
     }
 
 }
