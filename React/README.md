@@ -1,4 +1,8 @@
-﻿# Setup React
+﻿# TDD A React UI
+
+Remote pair-programming code kata by [Thomas Sundberg](https://thomassundberg.wordpress.com/)
+and [Peter Kofler](https://www.code-cop.org/): working on
+[Login Form TDD a UI Kata](https://blog.code-cop.org/2020/01/login-form-tdd-ui-kata.html).
 
 Setup to TDD a simple UI.
 
