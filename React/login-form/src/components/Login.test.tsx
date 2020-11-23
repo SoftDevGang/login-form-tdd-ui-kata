@@ -4,9 +4,8 @@ import Login from "./Login";
 import userEvent from "@testing-library/user-event";
 
 test('See the login dialog', async () => {
-    render(<Login authenticate={(userName, password) => {
-        return {success: false, message: ""}
-    }}/>);
+    const authenticate = jest.fn();
+    render(<Login authenticate={authenticate}/>);
 
     const actual = screen.getByLabelText("Phone, email or username");
 

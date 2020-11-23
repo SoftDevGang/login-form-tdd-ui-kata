@@ -1,10 +1,8 @@
 import React from "react";
+import {AuthenticateResult} from "./Authenticate";
 
 interface props {
-    authenticate: (userName: string, password: string) => {
-        success: boolean,
-        message: string
-    };
+    authenticate: (userName: string, password: string) => AuthenticateResult;
 }
 
 interface state {
