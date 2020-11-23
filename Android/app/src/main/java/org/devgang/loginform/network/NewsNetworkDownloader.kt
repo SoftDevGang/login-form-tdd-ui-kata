@@ -8,7 +8,6 @@ import org.devgang.loginform.model.NewsDownload
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
 
-
 class NewsNetworkDownloader(val url: String) : NewsDownload {
     override fun downloadNews(): Observable<NewsModel> {
         return Observable.create {

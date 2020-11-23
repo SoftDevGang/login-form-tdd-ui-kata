@@ -23,7 +23,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == VIEW_TYPE_NO_NEWS) {
+        if (viewType == VIEW_TYPE_NO_NEWS) {
             return NoNewsViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.viewholder_nonews, parent, false)
@@ -31,12 +31,13 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         } else {
             return NewsViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.viewholder_news, parent, false))
+                    .inflate(R.layout.viewholder_news, parent, false)
+            )
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(getItemViewType(position) == VIEW_TYPE_NEWS) {
+        if (getItemViewType(position) == VIEW_TYPE_NEWS) {
             (holder as NewsViewHolder).setTitle(newsModel[position].title)
         }
     }

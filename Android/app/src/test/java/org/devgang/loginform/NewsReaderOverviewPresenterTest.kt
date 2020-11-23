@@ -35,7 +35,7 @@ class NewsReaderOverviewPresenterTest {
     }
 
     @Test
-    fun should_not_process_data_after_dispose(){
+    fun should_not_process_data_after_dispose() {
         val item = NewsItem("dummyNewsItemTitle")
         val newsModel = NewsModel(arrayOf(item))
         val dummyNewsDownloader = NewsDownloaderStub(newsModel)
