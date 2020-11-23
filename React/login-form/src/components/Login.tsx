@@ -13,7 +13,19 @@ class Login extends React.Component<props> {
         return <div>
             <label htmlFor={"1"}>Phone, email or username</label>
             <input id={"1"} type={"text"}/>
+
+            <button onClick={() => this.authenticate()}>
+                Login
+            </button>
+
         </div>;
+    }
+
+    private authenticate(): void {
+        const userName: string = "userNameBob";
+        const password: string = "secretPassword";
+
+        this.props.authenticate(userName, password);
     }
 }
 
