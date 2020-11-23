@@ -10,10 +10,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.net.HttpURLConnection
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4::class) // TODO remove @RunWith, this is a plain unit test
 class NewsNetworkDownloaderTest {
 
-//TODO: move server in before and after
+    // TODO move mock server in before and after of test
 
     @Test
     fun should_download_no_news() {

@@ -2,6 +2,7 @@ package org.devgang.loginform.model
 
 class NewsItem(val title: String) {
     override fun equals(other: Any?): Boolean {
+        // TODO clean up generated equals: braces, cast, simplify return
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 

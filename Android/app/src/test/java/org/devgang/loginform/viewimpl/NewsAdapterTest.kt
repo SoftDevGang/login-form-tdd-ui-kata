@@ -3,8 +3,6 @@ package org.devgang.loginform.viewimpl
 import android.content.Context
 import android.widget.LinearLayout
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.devgang.loginform.model.NewsItem
-import org.devgang.loginform.model.NewsModel
 import org.devgang.loginform.view.OverviewItemViewModel
 import org.junit.Assert
 import org.junit.Ignore

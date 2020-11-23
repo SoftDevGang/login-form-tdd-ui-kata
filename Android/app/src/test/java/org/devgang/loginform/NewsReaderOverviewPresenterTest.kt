@@ -1,7 +1,7 @@
 package org.devgang.loginform
 
 import io.reactivex.schedulers.Schedulers
-import org.devgang.loginform.model.NewsDownloaderStub
+import org.devgang.loginform.network.NewsDownloaderStub
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
 import org.devgang.loginform.view.OverviewUiMock

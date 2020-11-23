@@ -4,7 +4,7 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.devgang.loginform.model.NewsDownload
+import org.devgang.loginform.network.NewsDownload
 import org.devgang.loginform.view.OverviewItemViewModel
 import org.devgang.loginform.view.OverviewUi
 
@@ -22,6 +22,10 @@ class NewsReaderOverviewPresenter(
             .subscribeOn(schedulerToSubscribe)
             .observeOn(schedulerToObserve)
             .subscribe { newsModel ->
+                // TODO separate RX from logic: make this a simple function again
+                // move out the scheduler things and the download. When download is finished
+                // this method is called
+                // TODO separate RX from logic: create download chain function somewhere?
                 if (newsModel.items.isEmpty()) {
                     overviewUi.displayNoResultsFound()
                 } else {
