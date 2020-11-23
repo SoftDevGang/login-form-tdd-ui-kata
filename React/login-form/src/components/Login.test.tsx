@@ -14,20 +14,13 @@ test('See the login dialog', async () => {
 });
 
 test('Call authenticate on button click', async () => {
-    /*
-    let authenticate = (userName, password) => {
-
-        return {success: false, message: ""}
-    };
-     */
-
     const authenticate = jest.fn();
     render(<Login authenticate={authenticate}/>);
 
-    // todo enter username, password and click login
-    // const actual = screen.getByLabelText("Phone, email or username");
+    const userName = screen.getByLabelText("Phone, email or username");
+    userEvent.type(userName, "userNameBob");
 
-    const loginButton: HTMLElement = await screen.getByText("Login");
+    const loginButton: HTMLElement = screen.getByText("Login");
     await userEvent.click(loginButton);
 
     expect(authenticate).toHaveBeenNthCalledWith(1, "userNameBob", "secretPassword");
