@@ -2,8 +2,10 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App/>);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('Clean code center should be in the page title', async () => {
+    render(<App/>);
+
+    const actual = screen.getByText("Welcome to Clean Code Center!")
+
+    expect(actual).toBeInTheDocument();
 });
