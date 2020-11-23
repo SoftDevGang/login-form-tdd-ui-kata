@@ -7,7 +7,10 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) 
+using the command 
+
+`npx create-react-app login-form --template typescript`
 
 ## Available Scripts
 
