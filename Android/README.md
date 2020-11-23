@@ -1,7 +1,7 @@
 # News Reader - Kotlin/Android
 
-Done in a Randori-styled [Coding Dojo](http://codingdojo.org/WhatIsCodingDojo/), 
-5 sessions a 2 hours.
+Done in a [Coding Dojo](http://codingdojo.org/WhatIsCodingDojo/), 
+6 sessions a 2 hours.
 
 ## Setup
 
@@ -38,7 +38,7 @@ Specific frameworks for testing Android UIs provided are [Espresso](https://deve
 
 8. Model, Download data. ||
 
-   - change download API to RX
+   - change download API to RX |
    - Challenge: Async testing
    - Challenge: Web download testing with OK HTTP
 
