@@ -1,6 +1,10 @@
 import React from "react";
 
 interface props {
+    authenticate: (userName: string, password: string) => {
+        success: boolean,
+        message: string
+    };
 }
 
 class Login extends React.Component<props> {

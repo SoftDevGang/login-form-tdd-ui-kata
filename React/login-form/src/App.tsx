@@ -20,7 +20,9 @@ function App() {
                     Learn React
                 </a>
             </header>
-            <Login/>
+            <Login authenticate={(userName, password) => {
+                return {success: false, message: ""}
+            }}/>
         </div>
     );
 }
