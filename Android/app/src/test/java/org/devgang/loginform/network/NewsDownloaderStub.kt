@@ -5,8 +5,7 @@ import io.reactivex.ObservableEmitter
 import org.devgang.loginform.model.NewsModel
 
 class NewsDownloaderStub(private var newsModel: NewsModel) : NewsDownload {
-    lateinit var observableEmitter: ObservableEmitter<NewsModel>
-    // TODO warning: observableEmitter should be private
+    private lateinit var observableEmitter: ObservableEmitter<NewsModel>
 
     override fun downloadNews(): Observable<NewsModel> {
         return Observable.create { emitter ->

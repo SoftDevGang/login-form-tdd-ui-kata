@@ -7,8 +7,7 @@ import okhttp3.Request
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
 
-class NewsNetworkDownloader(val url: String) : NewsDownload {
-    // TODO warning: url should be private
+class NewsNetworkDownloader(private val url: String) : NewsDownload {
     override fun downloadNews(): Observable<NewsModel> {
         return Observable.create {
 

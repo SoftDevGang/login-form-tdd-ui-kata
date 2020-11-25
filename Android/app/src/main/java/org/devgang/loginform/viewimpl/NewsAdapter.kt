@@ -23,14 +23,13 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        // TODO warning: lift return out of if
-        if (viewType == VIEW_TYPE_NO_NEWS) {
-            return NoNewsViewHolder(
+        return if (viewType == VIEW_TYPE_NO_NEWS) {
+            NoNewsViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.viewholder_nonews, parent, false)
             )
         } else {
-            return NewsViewHolder(
+            NewsViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.viewholder_news, parent, false)
             )
