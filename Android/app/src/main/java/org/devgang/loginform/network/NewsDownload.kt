@@ -8,5 +8,5 @@ interface NewsDownload {
     // and create a "toObservable()" function which reports the observable from the download
     // see https://github.com/ReactiveX/RxKotlin
     // Fix all subclasses (production and test)
-    fun downloadNews(): Observable<NewsModel>
+    fun newsUpdates(): Observable<NewsModel>
 }

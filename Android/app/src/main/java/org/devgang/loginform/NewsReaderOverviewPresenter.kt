@@ -17,7 +17,7 @@ class NewsReaderOverviewPresenter(
     private val compositeDisposable = CompositeDisposable()
 
     fun onLoad() {
-        val newsModelObservable = newsDownload.downloadNews()
+        val newsModelObservable = newsDownload.newsUpdates()
         val subscribe = newsModelObservable
             .subscribeOn(schedulerToSubscribe)
             .observeOn(schedulerToObserve)

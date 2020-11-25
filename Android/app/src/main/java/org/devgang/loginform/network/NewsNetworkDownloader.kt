@@ -8,23 +8,24 @@ import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
 
 class NewsNetworkDownloader(private val url: String) : NewsDownload {
-    override fun downloadNews(): Observable<NewsModel> {
-        return Observable.create {
-
-            val newsModel = downloadNewsBlocking()
-
-            it.onNext(newsModel)
-            it.onComplete()
-        }
+    override fun newsUpdates(): Observable<NewsModel> {
+        return Observable.fromCallable { downloadNews() }
     }
 
-    private fun downloadNewsBlocking(): NewsModel {
-        // TODO structure: split http and parsing logic, at least methods
-        val client = OkHttpClient()
-        val request = Request.Builder().url(url).addHeader("Content-Type", "application/json").build()
-        val response = client.newCall(request).execute()
-        val body = response.body?.string()
+    private fun downloadNews(): NewsModel {
+        val body = download()
+        return parse(body)
+    }
 
+    private fun download(): String? {
+        val client = OkHttpClient()
+        val request =
+            Request.Builder().url(url).addHeader("Content-Type", "application/json").build()
+        val response = client.newCall(request).execute()
+        return response.body?.string()
+    }
+
+    private fun parse(body: String?): NewsModel {
         val gson = Gson()
         val newsItems: Array<NewsItem> = gson.fromJson(body, Array<NewsItem>::class.java)
         return NewsModel(newsItems)

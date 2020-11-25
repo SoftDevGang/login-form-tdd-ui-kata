@@ -7,7 +7,7 @@ import org.devgang.loginform.model.NewsModel
 class NewsDownloaderStub(private var newsModel: NewsModel) : NewsDownload {
     private lateinit var observableEmitter: ObservableEmitter<NewsModel>
 
-    override fun downloadNews(): Observable<NewsModel> {
+    override fun newsUpdates(): Observable<NewsModel> {
         return Observable.create { emitter ->
             observableEmitter = emitter
         }

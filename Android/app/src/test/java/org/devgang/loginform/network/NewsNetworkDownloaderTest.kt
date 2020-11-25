@@ -25,7 +25,7 @@ class NewsNetworkDownloaderTest {
         val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
         val testObserver = TestObserver<NewsModel>()
-        newsNetworkDownloader.downloadNews().subscribe(testObserver)
+        newsNetworkDownloader.newsUpdates().subscribe(testObserver)
 
         testObserver.awaitCount(1)
         testObserver.assertValue(NewsModel(emptyArray()))
@@ -47,7 +47,7 @@ class NewsNetworkDownloaderTest {
         val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
         val testObserver = TestObserver<NewsModel>()
-        newsNetworkDownloader.downloadNews().subscribe(testObserver)
+        newsNetworkDownloader.newsUpdates().subscribe(testObserver)
 
         testObserver.awaitCount(1)
         testObserver.assertValue(NewsModel(arrayOf(NewsItem("foo"))))
