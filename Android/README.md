@@ -1,7 +1,7 @@
 # News Reader - Kotlin/Android
 
 Done in a [Coding Dojo](http://codingdojo.org/WhatIsCodingDojo/), 
-6 sessions a 2 hours.
+7 sessions a 1.5/2 hours.
 
 ## Setup
 
@@ -40,6 +40,8 @@ Specific frameworks for testing Android UIs provided are [Espresso](https://deve
 
    - change download API to RX |
    - Challenge: Async testing
-   - Challenge: Web download testing with OK HTTP
+   - Challenge: Web download testing with OK HTTP |
 
-9. Continue UI with click of item, etc.
+9. Application displays live data. WIN!
+
+10. Continue UI with click of item, etc.
