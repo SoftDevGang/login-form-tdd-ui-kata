@@ -55,6 +55,7 @@ class NewsOverviewActivityTest {
 
     @Test
     fun should_display_two_news() {
+        //TODO: Test shows weird error message. Idea: not excecute on create
         val newsOverviewActivity = getActivity() as NewsOverviewActivity
 
         val items =
