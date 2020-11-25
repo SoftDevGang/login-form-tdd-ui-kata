@@ -9,6 +9,7 @@ import org.devgang.loginform.model.NewsModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
 import java.net.HttpURLConnection
 
 class NewsNetworkDownloaderTest {
@@ -23,7 +24,7 @@ class NewsNetworkDownloaderTest {
 
     @Test
     fun should_download_no_news() {
-        val testUrl = prepareMockServer("[]")
+        val testUrl = prepareMockServer(HttpURLConnection.HTTP_OK, "[]")
         val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
         newsNetworkDownloader.newsUpdates().subscribe(testObserver)
@@ -34,7 +35,7 @@ class NewsNetworkDownloaderTest {
 
     @Test
     fun should_download_single_news() {
-        val testUrl = prepareMockServer("[{\"title\":\"foo\"}]")
+        val testUrl = prepareMockServer(HttpURLConnection.HTTP_OK, "[{\"title\":\"foo\"}]")
         val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
 
         newsNetworkDownloader.newsUpdates().subscribe(testObserver)
@@ -43,9 +44,19 @@ class NewsNetworkDownloaderTest {
         testObserver.assertValue(NewsModel(arrayOf(NewsItem("foo"))))
     }
 
-    private fun prepareMockServer(body: String): HttpUrl {
+    @Test
+    fun should_send_error_when_network_fails() {
+        val testUrl = prepareMockServer(HttpURLConnection.HTTP_NOT_FOUND, "")
+        val newsNetworkDownloader = NewsNetworkDownloader(testUrl.toString())
+
+        newsNetworkDownloader.newsUpdates().subscribe(testObserver)
+
+        testObserver.assertError(IOException::class.java)
+    }
+
+    private fun prepareMockServer(responseCode: Int, body: String): HttpUrl {
         mockServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK)
+            MockResponse().setResponseCode(responseCode)
                 .setBody(body)
         )
         return mockServer.url("/results.json")

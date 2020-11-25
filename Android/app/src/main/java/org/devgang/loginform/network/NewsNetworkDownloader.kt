@@ -6,6 +6,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.devgang.loginform.model.NewsItem
 import org.devgang.loginform.model.NewsModel
+import java.io.IOException
+import java.net.HttpURLConnection
 
 class NewsNetworkDownloader(private val url: String) : NewsDownload {
     override fun newsUpdates(): Observable<NewsModel> {
@@ -22,6 +24,10 @@ class NewsNetworkDownloader(private val url: String) : NewsDownload {
         val request =
             Request.Builder().url(url).addHeader("Content-Type", "application/json").build()
         val response = client.newCall(request).execute()
+
+        if (response.code != HttpURLConnection.HTTP_OK) {
+            throw IOException("Networkerror ${response.code}")
+        }
         return response.body?.string()
     }
 
