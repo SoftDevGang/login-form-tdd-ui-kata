@@ -4,11 +4,8 @@ Remote pair-programming code kata by [Thomas Sundberg](https://www.thinkcode.se/
 and [Peter Kofler](https://www.code-cop.org/): working on
 [Login Form TDD a UI Kata](https://blog.code-cop.org/2020/01/login-form-tdd-ui-kata.html).
 
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) 
-using the command 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+using the command
 
 `npx create-react-app login-form --template typescript`
 
