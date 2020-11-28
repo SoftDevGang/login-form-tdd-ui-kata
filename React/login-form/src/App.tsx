@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import './App.css';
 import Login from "./components/Login";
 import logo from './logo.svg';
@@ -20,7 +20,7 @@ function App() {
                     Learn React
                 </a>
             </header>
-            <Login authenticate={(userName, password) => {
+            <Login authenticate={(userName: string, password: string) => {
                 return { success: false, message: "" };
             }} />
         </div>
