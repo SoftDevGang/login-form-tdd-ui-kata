@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Login from "./components/Login";
+import logo from './logo.svg';
 
 function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+                <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Welcome to Clean Code Center!
                 </p>
@@ -21,8 +21,8 @@ function App() {
                 </a>
             </header>
             <Login authenticate={(userName, password) => {
-                return {success: false, message: ""}
-            }}/>
+                return { success: false, message: "" };
+            }} />
         </div>
     );
 }
