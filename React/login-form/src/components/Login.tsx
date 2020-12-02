@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthenticateResult } from "./Authenticate";
+import {AuthenticateResult} from "./Authenticate";
 
 interface Props {
     authenticate: (userName: string, password: string) => AuthenticateResult;
@@ -7,6 +7,7 @@ interface Props {
 
 interface State {
     userName: string;
+    password: string;
 }
 
 class Login extends React.Component<Props, State> {
@@ -15,18 +16,26 @@ class Login extends React.Component<Props, State> {
         super(props);
         this.state = {
             userName: "",
+            password: ""
         };
     }
 
     public render() {
         const userName = this.state.userName;
+        const password = this.state.password;
 
         return <div>
-            <label htmlFor={"1"}>Phone, email or username</label>
-            <input id={"1"}
-                type={"text"}
-                value={userName}
-                onChange={(event) => this.setUserName(event)}
+            <label htmlFor={"userName"}>Phone, email or username</label>
+            <input id={"userName"}
+                   type={"text"}
+                   value={userName}
+                   onChange={(event) => this.setUserName(event)}
+            />
+            <label htmlFor={"password"}>Password</label>
+            <input id={"password"}
+                   type={"text"}
+                   value={password}
+                   onChange={(event) => this.setPassword(event)}
             />
 
             <button onClick={() => this.authenticate()}>
@@ -45,7 +54,12 @@ class Login extends React.Component<Props, State> {
 
     private setUserName(event: React.ChangeEvent<HTMLInputElement>) {
         const userName: string = event.currentTarget.value;
-        this.setState({ userName });
+        this.setState({userName});
+    }
+
+    private setPassword(event: React.ChangeEvent<HTMLInputElement>) {
+        const password: string = event.currentTarget.value;
+        this.setState({password: password});
     }
 }
 
