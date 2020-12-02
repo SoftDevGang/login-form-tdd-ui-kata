@@ -4,7 +4,18 @@ import logo from './logo.svg';
 import React from "react";
 import {authenticate, AuthenticateResult} from "./components/Authenticate";
 
-class App extends React.Component<any> {
+interface State {
+    loggedIn: boolean;
+}
+
+class App extends React.Component<any, State> {
+    constructor(props: Readonly<any>) {
+        super(props);
+        this.state = {
+            loggedIn: false
+        };
+    }
+
     render() {
         return <div className="App">
             <header className="App-header">
@@ -23,9 +34,8 @@ class App extends React.Component<any> {
             </header>
             <Login failedLogin={false} authenticate={(userName: string, password: string) => {
                 authenticate(userName, password).then((result: AuthenticateResult) => {
-                    // todo show welcome message
+                    this.setState({loggedIn: result.success})
                 });
-
             }}/>
 
             {this.getWelcomeMessage()}
@@ -34,12 +44,15 @@ class App extends React.Component<any> {
     }
 
     private getWelcomeMessage(): React.ReactFragment {
-        return <></>
-        /*
-        return <p aria-label={"Welcome message"}>
-            Welcome Bob!
-        </p>;
-         */
+        const loggedIn: boolean = this.state.loggedIn;
+
+        if (loggedIn) {
+            return <p aria-label={"Welcome message"}>
+                Welcome Bob!
+            </p>;
+        } else {
+            return <></>
+        }
     }
 }
 
