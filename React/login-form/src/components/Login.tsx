@@ -33,7 +33,7 @@ class Login extends React.Component<Props, State> {
             />
             <label htmlFor={"password"}>Password</label>
             <input id={"password"}
-                   type={"text"}
+                   type={"password"}
                    value={password}
                    onChange={(event) => this.setPassword(event)}
             />
