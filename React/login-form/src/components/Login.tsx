@@ -1,9 +1,8 @@
 import React from "react";
-import {AuthenticateResult} from "./Authenticate";
 
 interface Props {
     failedLogin: boolean,
-    authenticate: (userName: string, password: string) => AuthenticateResult;
+    authenticate: (userName: string, password: string) => void;
 }
 
 interface State {

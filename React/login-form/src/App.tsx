@@ -2,6 +2,7 @@ import './App.css';
 import Login from "./components/Login";
 import logo from './logo.svg';
 import React from "react";
+import {authenticate, AuthenticateResult} from "./components/Authenticate";
 
 class App extends React.Component<any> {
     render() {
@@ -21,9 +22,24 @@ class App extends React.Component<any> {
                 </a>
             </header>
             <Login failedLogin={false} authenticate={(userName: string, password: string) => {
-                return {success: false, message: ""};
+                authenticate(userName, password).then((result: AuthenticateResult) => {
+                    // todo show welcome message
+                });
+
             }}/>
+
+            {this.getWelcomeMessage()}
+
         </div>
+    }
+
+    private getWelcomeMessage(): React.ReactFragment {
+        return <></>
+        /*
+        return <p aria-label={"Welcome message"}>
+            Welcome Bob!
+        </p>;
+         */
     }
 }
 
