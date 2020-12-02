@@ -19,6 +19,8 @@ test('Call authenticate on button click', async () => {
 
     const userName = screen.getByLabelText("Phone, email or username");
     userEvent.type(userName, "userNameBob");
+    const password = screen.getByLabelText("Password");
+    userEvent.type(password, "secretPassword");
 
     const loginButton: HTMLElement = screen.getByText("Login");
     await userEvent.click(loginButton);

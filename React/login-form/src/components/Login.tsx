@@ -47,7 +47,7 @@ class Login extends React.Component<Props, State> {
 
     private authenticate(): void {
         const userName: string = this.state.userName;
-        const password: string = "secretPassword";
+        const password: string = this.state.password;
 
         this.props.authenticate(userName, password);
     }
