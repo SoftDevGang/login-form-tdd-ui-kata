@@ -2,6 +2,7 @@ import React from "react";
 import {AuthenticateResult} from "./Authenticate";
 
 interface Props {
+    failedLogin: boolean,
     authenticate: (userName: string, password: string) => AuthenticateResult;
 }
 
@@ -23,6 +24,16 @@ class Login extends React.Component<Props, State> {
     public render() {
         const userName = this.state.userName;
         const password = this.state.password;
+        const failedLogin = this.props.failedLogin;
+
+        let errorMessage: React.ReactFragment;
+        if (failedLogin) {
+            errorMessage = <div aria-label={"Failed login"}>
+                You are not logged in
+            </div>
+        } else {
+            errorMessage = <div/>
+        }
 
         return <div>
             <label htmlFor={"userName"}>Phone, email or username</label>
@@ -37,6 +48,8 @@ class Login extends React.Component<Props, State> {
                    value={password}
                    onChange={(event) => this.setPassword(event)}
             />
+
+            {errorMessage}
 
             <button onClick={() => this.authenticate()}>
                 Login
