@@ -109,4 +109,9 @@ class NewsOverviewActivityTest {
             }
         }
     }
+
+    /* TODO 1. Presenter registriet sich  (am OverviewUi interface)
+            2. Mit Robolectric click auf NewsItem -> Method auf Presenter aufrufen
+            */
+
 }
