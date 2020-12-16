@@ -28,7 +28,7 @@ class NewsOverviewActivityTest {
 
         @AfterClass
         @JvmStatic
-        fun reseIntTestProperty() {
+        fun resetInTestProperty() {
             System.setProperty("NewsOverviewActivityInTest", "false")
         }
     }
@@ -109,6 +109,6 @@ class NewsOverviewActivityTest {
         }
     }
 
-    // TODO next test 1. Presenter registriet sich (am OverviewUi interface), Mit Robolectric click auf NewsItem -> Method auf Presenter aufrufen
+    // TODO next test 1. Presenter registriert sich (am OverviewUi interface), Mit Robolectric click auf NewsItem -> Method auf Presenter aufrufen
 
 }

@@ -26,7 +26,7 @@ class NewsNetworkDownloader(private val url: String) : NewsDownload {
         val response = client.newCall(request).execute()
 
         if (response.code != HttpURLConnection.HTTP_OK) {
-            throw IOException("Networkerror ${response.code}")
+            throw IOException("Network Error ${response.code}")
         }
         return response.body?.string()
     }
