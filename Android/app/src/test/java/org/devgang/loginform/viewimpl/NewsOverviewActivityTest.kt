@@ -13,6 +13,8 @@ import org.devgang.loginform.R
 import org.devgang.loginform.view.OverviewItemViewModel
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,13 +22,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NewsOverviewActivityTest {
 
-    class TestNewsOverviewActivity : NewsOverviewActivity() {
-        override fun initPresenter() {
-        }
+    @Before
+    fun initTest() {
+        NewsOverviewActivity.isTest = true
     }
 
     @get:Rule
-    var activityScenarioRule = activityScenarioRule<TestNewsOverviewActivity>()
+    var activityScenarioRule = activityScenarioRule<NewsOverviewActivity>()
 
     // https://stackoverflow.com/questions/24517291/get-current-activity-in-espresso-android
     private fun getActivity(): Activity? {
@@ -67,22 +69,8 @@ class NewsOverviewActivityTest {
             listOf(OverviewItemViewModel("First News"), OverviewItemViewModel("Second News"))
         newsOverviewActivity.setViewModel(items)
 
-        onView(withId(R.id.newsContainer)).check(
-            matches(
-                atPosition(
-                    0,
-                    hasDescendant(withText("First News"))
-                )
-            )
-        )
-        onView(withId(R.id.newsContainer)).check(
-            matches(
-                atPosition(
-                    1,
-                    hasDescendant(withText("Second News"))
-                )
-            )
-        )
+        onView(withId(R.id.newsContainer)).check(matches(atPosition(0, hasDescendant(withText("First News")))))
+        onView(withId(R.id.newsContainer)).check(matches(atPosition(1, hasDescendant(withText("Second News")))))
     }
 
     // see https://stackoverflow.com/a/34795431/104143

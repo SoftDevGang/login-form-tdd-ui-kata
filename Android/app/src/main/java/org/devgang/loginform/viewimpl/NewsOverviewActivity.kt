@@ -11,10 +11,14 @@ import org.devgang.loginform.network.NewsNetworkDownloader
 import org.devgang.loginform.view.OverviewItemViewModel
 import org.devgang.loginform.view.OverviewUi
 
-open class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
+class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 
     private val newsAdapter = NewsAdapter()
     private lateinit var presenter: NewsReaderOverviewPresenter
+
+    companion object {
+        open var isTest = false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +35,11 @@ open class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
         super.onPostCreate(savedInstanceState)
     }
 
-    open protected fun initPresenter() {
+    fun initPresenter() {
         val newsDownload =
             NewsNetworkDownloader("https://appsdata.laola1.at/data/probetag/news.json")
         presenter = NewsReaderOverviewPresenter(this, newsDownload)
+        if(isTest) return
         presenter.onLoad()
     }
 
