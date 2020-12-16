@@ -11,7 +11,7 @@ import org.devgang.loginform.network.NewsNetworkDownloader
 import org.devgang.loginform.view.OverviewItemViewModel
 import org.devgang.loginform.view.OverviewUi
 
-class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
+open class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 
     private val newsAdapter = NewsAdapter()
     private lateinit var presenter: NewsReaderOverviewPresenter
@@ -27,11 +27,15 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
+        initPresenter()
+        super.onPostCreate(savedInstanceState)
+    }
+
+    open protected fun initPresenter() {
         val newsDownload =
             NewsNetworkDownloader("https://appsdata.laola1.at/data/probetag/news.json")
         presenter = NewsReaderOverviewPresenter(this, newsDownload)
         presenter.onLoad()
-        super.onPostCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
