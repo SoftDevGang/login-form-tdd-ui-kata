@@ -1,7 +1,7 @@
 # News Reader - Kotlin/Android
 
 Done in a [Coding Dojo](http://codingdojo.org/WhatIsCodingDojo/), 
-7 sessions a 1.5/2 hours.
+8 sessions a 1.5/2 hours.
 
 ## Setup
 
@@ -44,4 +44,7 @@ Specific frameworks for testing Android UIs provided are [Espresso](https://deve
 
 9. Application displays live data. WIN!
 
-10. Continue UI with click of item, etc.
+   - Challenge: test flag to avoid double init of application |
+
+10. Continue UI with click of item, etc. |
+
