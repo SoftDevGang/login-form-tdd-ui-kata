@@ -1,8 +1,8 @@
 package org.devgang.loginform.viewimpl
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.devgang.loginform.NewsReaderOverviewPresenter
@@ -15,10 +15,6 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
 
     private val newsAdapter = NewsAdapter()
     private lateinit var presenter: NewsReaderOverviewPresenter
-
-    companion object {
-        open var isTest = false
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,7 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
         val newsDownload =
             NewsNetworkDownloader("https://appsdata.laola1.at/data/probetag/news.json")
         presenter = NewsReaderOverviewPresenter(this, newsDownload)
-        if(isTest) return
+        if(System.getProperty("NewsOverviewActivityInTest", "false").toBoolean()) return
         presenter.onLoad()
     }
 
