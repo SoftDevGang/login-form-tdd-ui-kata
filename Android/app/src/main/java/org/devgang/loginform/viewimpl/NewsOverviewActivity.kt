@@ -31,10 +31,11 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
         super.onPostCreate(savedInstanceState)
     }
 
-    fun initPresenter() {
+    private fun initPresenter() {
         val newsDownload =
             NewsNetworkDownloader("https://appsdata.laola1.at/data/probetag/news.json")
         presenter = NewsReaderOverviewPresenter(this, newsDownload)
+
         if (System.getProperty("NewsOverviewActivityInTest", "false").toBoolean()) {
             return
         }
