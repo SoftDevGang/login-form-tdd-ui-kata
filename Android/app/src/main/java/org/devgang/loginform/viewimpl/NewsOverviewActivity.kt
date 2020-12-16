@@ -35,7 +35,9 @@ class NewsOverviewActivity : AppCompatActivity(), OverviewUi {
         val newsDownload =
             NewsNetworkDownloader("https://appsdata.laola1.at/data/probetag/news.json")
         presenter = NewsReaderOverviewPresenter(this, newsDownload)
-        if(System.getProperty("NewsOverviewActivityInTest", "false").toBoolean()) return
+        if (System.getProperty("NewsOverviewActivityInTest", "false").toBoolean()) {
+            return
+        }
         presenter.onLoad()
     }
 

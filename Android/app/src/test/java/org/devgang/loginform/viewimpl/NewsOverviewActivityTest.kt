@@ -19,17 +19,16 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NewsOverviewActivityTest {
 
-
     companion object {
         @BeforeClass
         @JvmStatic
-        fun setTestProperty2() {
+        fun setInTestProperty() {
             System.setProperty("NewsOverviewActivityInTest", "true")
         }
 
         @AfterClass
         @JvmStatic
-        fun resetTestProperty2() {
+        fun reseIntTestProperty() {
             System.setProperty("NewsOverviewActivityInTest", "false")
         }
     }
@@ -110,8 +109,6 @@ class NewsOverviewActivityTest {
         }
     }
 
-    /* TODO 1. Presenter registriet sich  (am OverviewUi interface)
-            2. Mit Robolectric click auf NewsItem -> Method auf Presenter aufrufen
-            */
+    // TODO next test 1. Presenter registriet sich (am OverviewUi interface), Mit Robolectric click auf NewsItem -> Method auf Presenter aufrufen
 
 }
