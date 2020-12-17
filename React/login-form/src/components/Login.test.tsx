@@ -2,27 +2,30 @@ import { render, screen } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import Login from "./Login";
 
-test('See the login dialog with two input fields', async () => {
+// 2. drive the UI of the login dialog
+test('See the login dialog with two input fields', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={false} authenticate={authenticate} />);
 
-    const actualUsername = screen.getByLabelText("Phone, email or username");
-    const actualPassword = screen.getByLabelText("Password");
+    const userName = screen.getByLabelText("Phone, email or username");
+    const password = screen.getByLabelText("Password");
 
-    expect(actualUsername).toBeInTheDocument();
-    expect(actualPassword).toBeInTheDocument();
+    expect(userName).toBeInTheDocument();
+    expect(password).toBeInTheDocument();
 });
 
-test('The password field should display stars when typing in it', async () => {
+// 2.2
+test('The password field displays stars when typing in it', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={false} authenticate={authenticate} />);
 
-    const actualPassword = screen.getByLabelText("Password");
+    const password = screen.getByLabelText("Password");
 
-    expect(actualPassword).toHaveAttribute("type", "password");
+    expect(password).toHaveAttribute("type", "password");
 });
 
-test('Call authenticate on button click', async () => {
+// 2.3 drive the logic
+test('Call authenticate on button click', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={false} authenticate={authenticate} />);
 
@@ -32,19 +35,29 @@ test('Call authenticate on button click', async () => {
     userEvent.type(password, "secretPassword");
 
     const loginButton: HTMLElement = screen.getByText("Login");
-    await userEvent.click(loginButton);
+    userEvent.click(loginButton);
 
     expect(authenticate).toHaveBeenNthCalledWith(1, "userNameBob", "secretPassword");
 });
 
-// todo the error should not be displayed when we see the login the first time
-
-test('Should display error message on failed login', async () => {
+// 2.4 interaction with the result of callback
+test('Display error message on failed login', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={true} authenticate={authenticate} />);
 
     const errorMessage = screen.getByLabelText("Failed login");
 
     expect(errorMessage).toHaveTextContent("You are not logged in");
-    // todo check that we can see a proper error css
+    // TODO check that we can see a proper error css
+    // expect(errorMessage).toHaveAttribute("class", "foo");
+});
+
+// 2.5
+test('Display no error message on first login', () => {
+    const authenticate = jest.fn();
+    render(<Login failedLogin={false} authenticate={authenticate} />);
+
+    const errorMessage = screen.findByLabelText("Failed login").
+        then(_ => { expect(true).toBeFalsy(); });
+        // weird: returns a Promise with {} inside?
 });

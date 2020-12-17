@@ -18,23 +18,27 @@ afterEach(() => server.resetHandlers());
 beforeAll(() => server.listen());
 afterAll(() => server.close());
 
-test('Clean code center should be in the page title', async () => {
+// 1. make sure we see the app at all
+test('See "Clean Code Center"', () => {
     render(<App />);
 
-    const actual = screen.getByText("Welcome to Clean Code Center!");
+    const element = screen.getByText("Welcome to Clean Code Center!");
 
-    expect(actual).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
 });
 
-test('See the login dialog', async () => {
+// 1.2. make sure we see the app at all
+test('See the login dialog', () => {
     render(<App />);
 
-    const actual = screen.getByLabelText("Phone, email or username");
+    const element = screen.getByLabelText("Phone, email or username");
 
-    expect(actual).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
 });
 
-test('Should display a welcome message on a successful login', async () => {
+// TODO test case: the error should not be displayed when we see the login the first time
+
+test('See welcome message on a successful login', async () => {
     render(<App />);
     const userName = screen.getByLabelText("Phone, email or username");
     userEvent.type(userName, "Bob");
@@ -42,7 +46,7 @@ test('Should display a welcome message on a successful login', async () => {
     userEvent.type(password, "secretPassword");
 
     const loginButton: HTMLElement = screen.getByText("Login");
-    await userEvent.click(loginButton);
+    userEvent.click(loginButton);
 
     await sleep(50);
 
