@@ -1,10 +1,10 @@
-import {rest} from 'msw'
-import {setupServer} from 'msw/node';
-import {authenticate, AuthenticateResult} from "./Authenticate";
+import { rest } from 'msw'
+import { setupServer } from 'msw/node';
+import { authenticate, AuthenticateResult } from "./Authenticate";
 
 const server = setupServer(
     rest.post('/api/v1/login', (req, res, ctx) => {
-        let body = {success: true, message: "I was called"};
+        let body = { success: true, message: "I was called" };
         // todo add error situations and login failures with more tests
         return res(
             ctx.status(200),

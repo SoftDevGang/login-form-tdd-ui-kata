@@ -2,7 +2,7 @@ import './App.css';
 import Login from "./components/Login";
 import logo from './logo.svg';
 import React from "react";
-import {authenticate, AuthenticateResult} from "./components/Authenticate";
+import { authenticate, AuthenticateResult } from "./components/Authenticate";
 
 interface State {
     loggedIn: boolean;
@@ -19,7 +19,7 @@ class App extends React.Component<any, State> {
     render() {
         return <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+                <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Welcome to Clean Code Center!
                 </p>
@@ -34,9 +34,9 @@ class App extends React.Component<any, State> {
             </header>
             <Login failedLogin={false} authenticate={(userName: string, password: string) => {
                 authenticate(userName, password).then((result: AuthenticateResult) => {
-                    this.setState({loggedIn: result.success})
+                    this.setState({ loggedIn: result.success })
                 });
-            }}/>
+            }} />
 
             {this.getWelcomeMessage()}
 

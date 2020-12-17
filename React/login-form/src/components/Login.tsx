@@ -31,21 +31,21 @@ class Login extends React.Component<Props, State> {
                 You are not logged in
             </div>
         } else {
-            errorMessage = <div/>
+            errorMessage = <div />
         }
 
         return <div>
             <label htmlFor={"userName"}>Phone, email or username</label>
             <input id={"userName"}
-                   type={"text"}
-                   value={userName}
-                   onChange={(event) => this.setUserName(event)}
+                type={"text"}
+                value={userName}
+                onChange={(event) => this.setUserName(event)}
             />
             <label htmlFor={"password"}>Password</label>
             <input id={"password"}
-                   type={"password"}
-                   value={password}
-                   onChange={(event) => this.setPassword(event)}
+                type={"password"}
+                value={password}
+                onChange={(event) => this.setPassword(event)}
             />
 
             {errorMessage}
@@ -66,12 +66,12 @@ class Login extends React.Component<Props, State> {
 
     private setUserName(event: React.ChangeEvent<HTMLInputElement>) {
         const userName: string = event.currentTarget.value;
-        this.setState({userName});
+        this.setState({ userName });
     }
 
     private setPassword(event: React.ChangeEvent<HTMLInputElement>) {
         const password: string = event.currentTarget.value;
-        this.setState({password: password});
+        this.setState({ password: password });
     }
 }
 

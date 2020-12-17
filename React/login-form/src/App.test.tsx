@@ -1,15 +1,15 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 import userEvent from "@testing-library/user-event";
-import {rest} from 'msw'
-import {setupServer} from 'msw/node';
+import { rest } from 'msw'
+import { setupServer } from 'msw/node';
 
 const server = setupServer(
     rest.post('/api/v1/login', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.set('Content-Type', 'application/json'),
-            ctx.json({success: true, message: ""})
+            ctx.json({ success: true, message: "" })
         );
     }),
 );
@@ -19,7 +19,7 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 
 test('Clean code center should be in the page title', async () => {
-    render(<App/>);
+    render(<App />);
 
     const actual = screen.getByText("Welcome to Clean Code Center!");
 
@@ -27,7 +27,7 @@ test('Clean code center should be in the page title', async () => {
 });
 
 test('See the login dialog', async () => {
-    render(<App/>);
+    render(<App />);
 
     const actual = screen.getByLabelText("Phone, email or username");
 
@@ -35,7 +35,7 @@ test('See the login dialog', async () => {
 });
 
 test('Should display a welcome message on a successful login', async () => {
-    render(<App/>);
+    render(<App />);
     const userName = screen.getByLabelText("Phone, email or username");
     userEvent.type(userName, "Bob");
     const password = screen.getByLabelText("Password");
