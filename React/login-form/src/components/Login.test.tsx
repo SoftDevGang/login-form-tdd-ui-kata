@@ -28,7 +28,6 @@ test('The password field displays stars when typing in it', () => {
 test('Call authenticate on button click', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={false} authenticate={authenticate} />);
-
     const userName = screen.getByLabelText("Phone, email or username");
     userEvent.type(userName, "userNameBob");
     const password = screen.getByLabelText("Password");
