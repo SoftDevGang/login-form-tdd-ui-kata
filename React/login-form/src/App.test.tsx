@@ -77,6 +77,7 @@ function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// 4.1. authentication callback failure
 test('See error dialog on a failed login', async () => {
     body = { success: false, message: "" };
     render(<App />);

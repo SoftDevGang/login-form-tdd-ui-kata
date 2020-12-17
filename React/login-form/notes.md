@@ -98,3 +98,8 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 ### 17.12.2020
 
 Peter
+
+- 3 pomodoros
+- label test after diagram |
+- add some tests |
+- code cleanup |
