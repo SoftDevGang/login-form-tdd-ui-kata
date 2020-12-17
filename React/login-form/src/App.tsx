@@ -6,13 +6,15 @@ import { authenticate, AuthenticateResult } from "./components/Authenticate";
 
 interface State {
     loggedIn: boolean;
+    loginTries: number;
 }
 
 class App extends React.Component<any, State> {
     constructor(props: Readonly<any>) {
         super(props);
         this.state = {
-            loggedIn: false
+            loggedIn: false,
+            loginTries: 0
         };
     }
 
@@ -41,11 +43,15 @@ class App extends React.Component<any, State> {
 
     private loginDialog(): React.ReactFragment {
         const loggedIn: boolean = this.state.loggedIn;
+        const loginTries: number = this.state.loginTries;
 
         if (!loggedIn) {
-            return <Login failedLogin={false} authenticate={(userName: string, password: string) => {
+            return <Login failedLogin={loginTries > 0} authenticate={(userName: string, password: string) => {
                 authenticate(userName, password).then((result: AuthenticateResult) => {
-                    this.setState({ loggedIn: result.success })
+                    this.setState({
+                        loggedIn: result.success,
+                        loginTries: loginTries + 1
+                    });
                 });
             }} />;
         } else {
