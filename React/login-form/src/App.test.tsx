@@ -34,26 +34,23 @@ test('See "Clean Code Center"', () => {
 test('See the login dialog', () => {
     render(<App />);
 
-    const element = screen.getByLabelText("Phone, email or username");
-
-    expect(element).toBeInTheDocument();
+    expectLoginDialogFields();
 });
 
-// TODO test case: the error should not be displayed when we see the login the first time
+function expectLoginDialogFields() {
+    const element = screen.getByLabelText("Phone, email or username");
+    expect(element).toBeInTheDocument();
+}
 
 // 4. wire the authentication callback
 test('See welcome message on a successful login', async () => {
     body = { success: true, message: "" };
     render(<App />);
-    const userName = screen.getByLabelText("Phone, email or username");
-    userEvent.type(userName, "Bill");
-    const password = screen.getByLabelText("Password");
-    userEvent.type(password, "secretPassword");
 
-    const loginButton: HTMLElement = screen.getByText("Login");
-    userEvent.click(loginButton);
-    await sleep(50);
+    typeUserNameAndPassword("Bill", "secretPassword");
+    await clickLoginButton();
 
+    // next component is open
     const welcome = screen.getByLabelText("Welcome message");
     expect(welcome).toBeInTheDocument(); // generic for just checking existence
     expect(welcome).toHaveTextContent("Welcome Bill!");
@@ -61,6 +58,20 @@ test('See welcome message on a successful login', async () => {
     // reuse test - do not show Login component on success
     expect(screen.queryByLabelText("Phone, email or username")).toBeNull();
 });
+
+
+function typeUserNameAndPassword(userName: string, password: string) {
+    const userNameField = screen.getByLabelText("Phone, email or username");
+    userEvent.type(userNameField, userName);
+    const passwordField = screen.getByLabelText("Password");
+    userEvent.type(passwordField, password);
+}
+
+async function clickLoginButton() {
+    const loginButton: HTMLElement = screen.getByText("Login");
+    userEvent.click(loginButton);
+    await sleep(50);
+}
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -73,22 +84,13 @@ test('See error dialog on a failed login', async () => {
     // no error dialog at startup
     expect(screen.queryByLabelText("Failed login")).toBeNull();
 
-    const userName = screen.getByLabelText("Phone, email or username");
-    userEvent.type(userName, "Bob");
-    const password = screen.getByLabelText("Password");
-    userEvent.type(password, "secretPassword");
-
-    const loginButton: HTMLElement = screen.getByText("Login");
-    userEvent.click(loginButton);
-    await sleep(50);
+    typeUserNameAndPassword("Bob", "secretPassword");
+    await clickLoginButton();
 
     // login is still here
-    const element = screen.getByLabelText("Phone, email or username");
-    expect(element).toBeInTheDocument();
+    expectLoginDialogFields();
 
     // and it displays error message
     const errorMessage = screen.getByLabelText("Failed login");
     expect(errorMessage).toBeInTheDocument(); // generic for just checking existence
 });
-
-// - see the username in welcome message - variant
