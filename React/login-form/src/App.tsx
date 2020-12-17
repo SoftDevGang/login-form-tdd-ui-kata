@@ -32,15 +32,25 @@ class App extends React.Component<any, State> {
                     Learn React
                 </a>
             </header>
-            <Login failedLogin={false} authenticate={(userName: string, password: string) => {
-                authenticate(userName, password).then((result: AuthenticateResult) => {
-                    this.setState({ loggedIn: result.success })
-                });
-            }} />
 
+            {this.loginDialog()}
             {this.getWelcomeMessage()}
 
         </div>
+    }
+
+    private loginDialog(): React.ReactFragment {
+        const loggedIn: boolean = this.state.loggedIn;
+
+        if (!loggedIn) {
+            return <Login failedLogin={false} authenticate={(userName: string, password: string) => {
+                authenticate(userName, password).then((result: AuthenticateResult) => {
+                    this.setState({ loggedIn: result.success })
+                });
+            }} />;
+        } else {
+            return <></>;
+        }
     }
 
     private getWelcomeMessage(): React.ReactFragment {
@@ -51,7 +61,7 @@ class App extends React.Component<any, State> {
                 Welcome Bob!
             </p>;
         } else {
-            return <></>
+            return <></>;
         }
     }
 }

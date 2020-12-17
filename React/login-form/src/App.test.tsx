@@ -54,7 +54,7 @@ test('See welcome message on a successful login', async () => {
     expect(welcome).toHaveTextContent("Welcome Bob!");
 
     // reuse test - do not show Login component on success
-    // expect(screen.queryByLabelText("Phone, email or username")).toBeNull();
+    expect(screen.queryByLabelText("Phone, email or username")).toBeNull();
 });
 
 function sleep(ms: number) {

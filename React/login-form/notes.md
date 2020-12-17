@@ -37,11 +37,11 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 - small steps take more time?
 - want feedback sooner
 
-#### TODO for next: interaction
+#### Tasks for next: interaction
 
 - (Peter) use Authentication.ts in real when Authentication code is finished.
 - Show error message at login failure
-- Show next component at login success
+- Show next component at login success (DONE)
 
 ### 02.12.2020
 
@@ -88,9 +88,13 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 - testing library: pretty fast, works well, we test everything using the UI,
   encourages using the UI for all things.
 
-#### TODO for next: clean up
+#### Tasks for next: clean up
 
 - extract authenticate callback from render function.
-- do not show Login component on success
+- do not show Login component on success (DONE)
 - see the username in welcome message
 - features: test failure case and pass the failure flag (not related TDD UI)
+
+### 17.12.2020
+
+Peter

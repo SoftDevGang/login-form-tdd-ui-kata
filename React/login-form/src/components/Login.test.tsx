@@ -56,7 +56,5 @@ test('Display no error message on first login', () => {
     const authenticate = jest.fn();
     render(<Login failedLogin={false} authenticate={authenticate} />);
 
-    const errorMessage = screen.findByLabelText("Failed login").
-        then(_ => { expect(true).toBeFalsy(); });
-        // weird: returns a Promise with {} inside?
+    expect(screen.queryByLabelText("Failed login")).toBeNull();
 });
