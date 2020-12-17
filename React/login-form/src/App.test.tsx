@@ -38,6 +38,7 @@ test('See the login dialog', () => {
 
 // TODO test case: the error should not be displayed when we see the login the first time
 
+// 4. wire the authentication callback
 test('See welcome message on a successful login', async () => {
     render(<App />);
     const userName = screen.getByLabelText("Phone, email or username");
@@ -47,13 +48,18 @@ test('See welcome message on a successful login', async () => {
 
     const loginButton: HTMLElement = screen.getByText("Login");
     userEvent.click(loginButton);
-
     await sleep(50);
 
-    const actual = screen.getByLabelText("Welcome message");
-    expect(actual).toHaveTextContent("Welcome Bob!");
+    const welcome = screen.getByLabelText("Welcome message");
+    expect(welcome).toHaveTextContent("Welcome Bob!");
+
+    // reuse test - do not show Login component on success
+    // expect(screen.queryByLabelText("Phone, email or username")).toBeNull();
 });
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+// - see the username in welcome message - variant
+// - Show error message at login failure
