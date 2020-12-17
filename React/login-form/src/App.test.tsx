@@ -46,7 +46,7 @@ test('See welcome message on a successful login', async () => {
     body = { success: true, message: "" };
     render(<App />);
     const userName = screen.getByLabelText("Phone, email or username");
-    userEvent.type(userName, "Bob");
+    userEvent.type(userName, "Bill");
     const password = screen.getByLabelText("Password");
     userEvent.type(password, "secretPassword");
 
@@ -56,7 +56,7 @@ test('See welcome message on a successful login', async () => {
 
     const welcome = screen.getByLabelText("Welcome message");
     expect(welcome).toBeInTheDocument(); // generic for just checking existence
-    expect(welcome).toHaveTextContent("Welcome Bob!");
+    expect(welcome).toHaveTextContent("Welcome Bill!");
 
     // reuse test - do not show Login component on success
     expect(screen.queryByLabelText("Phone, email or username")).toBeNull();

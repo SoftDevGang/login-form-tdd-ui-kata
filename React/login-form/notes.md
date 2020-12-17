@@ -92,7 +92,7 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 
 - extract authenticate callback from render function.
 - do not show Login component on success (DONE)
-- see the username in welcome message
+- see the username in welcome message (DONE)
 - features: test failure case and pass the failure flag (not related TDD UI)
 
 ### 17.12.2020

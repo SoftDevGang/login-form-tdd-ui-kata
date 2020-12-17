@@ -7,6 +7,7 @@ import { authenticate, AuthenticateResult } from "./components/Authenticate";
 interface State {
     loggedIn: boolean;
     loginTries: number;
+    userName: string;
 }
 
 class App extends React.Component<any, State> {
@@ -14,7 +15,8 @@ class App extends React.Component<any, State> {
         super(props);
         this.state = {
             loggedIn: false,
-            loginTries: 0
+            loginTries: 0,
+            userName: ""
         };
     }
 
@@ -50,7 +52,8 @@ class App extends React.Component<any, State> {
                 authenticate(userName, password).then((result: AuthenticateResult) => {
                     this.setState({
                         loggedIn: result.success,
-                        loginTries: loginTries + 1
+                        loginTries: loginTries + 1,
+                        userName
                     });
                 });
             }} />;
@@ -61,10 +64,11 @@ class App extends React.Component<any, State> {
 
     private getWelcomeMessage(): React.ReactFragment {
         const loggedIn: boolean = this.state.loggedIn;
+        const userName: string = this.state.userName;
 
         if (loggedIn) {
             return <p aria-label={"Welcome message"}>
-                Welcome Bob!
+                Welcome {userName}!
             </p>;
         } else {
             return <></>;
