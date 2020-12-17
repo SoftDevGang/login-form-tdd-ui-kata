@@ -40,7 +40,7 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 #### Tasks for next: interaction
 
 - (Peter) use Authentication.ts in real when Authentication code is finished.
-- Show error message at login failure
+- Show error message at login failure (DONE)
 - Show next component at login success (DONE)
 
 ### 02.12.2020
@@ -90,7 +90,7 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 
 #### Tasks for next: clean up
 
-- extract authenticate callback from render function.
+- extract authenticate callback from render function. (DONE)
 - do not show Login component on success (DONE)
 - see the username in welcome message (DONE)
 - features: test failure case and pass the failure flag (not related TDD UI)
