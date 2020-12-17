@@ -21,6 +21,7 @@ afterAll(() => server.close());
 
 // 3. drive backend service with integrated web server
 test('Authenticate calls backend endpoint', async () => {
+    statusCode = 200;
     body = { success: true, message: "I was called" };
 
     const actual: AuthenticateResult = await authenticate("Bob", "Bobs password");
@@ -30,4 +31,22 @@ test('Authenticate calls backend endpoint', async () => {
 });
 
 // 3.1 check for proper POST request containing username and password
+
 // 3.2 add login failures and error situations
+test('Server denies access', async () => {
+    statusCode = 200;
+    body = { success: false, message: "" };
+
+    const actual: AuthenticateResult = await authenticate("Bob", "Bobs password");
+
+    expect(actual.success).toBeFalsy();
+});
+
+test('Server errors deny access', async () => {
+    statusCode = 404;
+    body = { success: true, message: "" };
+
+    const actual: AuthenticateResult = await authenticate("Bob", "Bobs password");
+
+    expect(actual.success).toBeFalsy();
+});
