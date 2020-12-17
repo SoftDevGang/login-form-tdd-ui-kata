@@ -6,11 +6,10 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 
 ## Goal
 
-- Create sample code for a blog post showing TDD on the UI using React. 75%
-- See how it is done in React. Done.
-- Is it good enough/fast enough not to separate the UI and the model? Yes.
-- Is it unit test? Not an important question. No. Feels like Micro test. Yes.
-- 
+- (T) Create sample code for a blog post showing TDD on the UI using React. 75%
+- (P) See how it is done in React. Done.
+- (P) Is it good enough/fast enough not to separate the UI and the model? Yes.
+- (P) Is it unit test? Not an important question. No. Feels like Micro test. Yes.
 
 ## Sessions
 
@@ -22,15 +21,15 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 - 12:45 "big step in small steps" ||
 - 13:45 retro
 
-#### Learnings
+#### Learnings #1
 
-- Peter: react component allows refactor/pressure in the known sense
+- Peter: React component allows refactor/pressure in the known sense
   maybe also true for any UI but never thought about it
-- visible ui widgets are tested implicitly, not tested it
+- visible UI widgets are tested implicitly, not tested directly
 - React has some UI model, so we need to its test connection.
   But it is not recommended to look into data from outside.
 
-#### Retro
+#### Retrospective #1
 
 - Thomas says we are taking smaller steps than he thought.
 - Easy to make assumptions alone, other person has different assumptions.
@@ -57,13 +56,14 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 
 #### Tests
 
-- no test for field type
+- no test for field type.
 - no test for field id.
 - no test for displaying ~~and at beginning setting state of~~ field
 
-#### Learnings
+#### Learnings #2
 
-- We recycled tests/added fields to them incrementally. Why not create a new test? Too much setup?
+- We recycled tests/added fields to them incrementally.
+  Why not create a new test? Too much setup?
 - how technical should UI tests be? "be type password" or "display asterisks"?
 - could have our own password field which can display clear text on check box
 - sketch the UI logic to know how to test for it?
@@ -72,9 +72,9 @@ and [Peter Kofler](https://www.code-cop.org/): working on
 - Tests are OK but App does not compile due missing required attribute? wtf
 - What about duplication between single (unit) test and app tests when invoking the same thing?
 - Add UI hardcoded on red test - green - I know what result of logic should be.
-- Mock Service Worker https://mswjs.io/
+- [Mock Service Worker](https://mswjs.io/)
 
-#### Retrospective
+#### Retrospective #2
 
 - better than last time, progress ||
 - less yak shaving than last time ;-)
@@ -85,10 +85,10 @@ and [Peter Kofler](https://www.code-cop.org/): working on
   (Only state/props annoying)
 - Could split components in Login even further -> 3 components, flexibility
 - dive right into it. nice
-- testing library: pretty fast, works well, we test everything using the UI, 
+- testing library: pretty fast, works well, we test everything using the UI,
   encourages using the UI for all things.
 
-#### TODO for next: cleanup
+#### TODO for next: clean up
 
 - extract authenticate callback from render function.
 - do not show Login component on success
